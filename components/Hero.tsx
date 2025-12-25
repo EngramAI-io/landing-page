@@ -24,16 +24,16 @@ export default function Hero() {
           did. Trust the record.
         </h1>
 
-        <p className="text-xl md:text-2xl text-white/50 mb-12 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-xl md:text-2xl text-white/70 mb-12 max-w-3xl mx-auto leading-relaxed">
           Sentinel is a{" "}
-          <span className="text-white/80">transparent, fail-open</span>{" "}
+          <span className="text-white/100">transparent, fail-open</span>{" "}
           observability sidecar for{" "}
-          <span className="text-white/80">Model Context Protocol (MCP)</span>.
+          <span className="text-white/100">Model Context Protocol (MCP)</span>.
           It provides{" "}
           <span className="text-brand-accent">identity</span>,{" "}
           <span className="text-brand-accent">ordering</span>, and{" "}
           <span className="text-brand-accent">integrity</span> guarantees for
-          agent ↔ tool interactions — without modifying execution, gating tools,
+          agent ↔ tool interactions - without modifying execution, gating tools,
           or coupling to agents.
         </p>
 
@@ -49,7 +49,7 @@ export default function Hero() {
 
           <a
             href="#guarantees"
-            className="text-sm text-white/50 hover:text-brand-accent transition-colors"
+            className="text-sm text-white/100 hover:text-brand-accent transition-colors"
           >
             Explore the guarantees →
           </a>

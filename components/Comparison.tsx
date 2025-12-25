@@ -49,7 +49,7 @@ export default function Comparison() {
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Sentinel vs Official MCP Inspector
           </h2>
-          <p className="text-xl md:text-2xl text-white/50 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             The Inspector helps you test tools in isolation. Sentinel is built to
             observe real agent behavior in the wild — with ordering, correlation,
             and verifiable audit trails.
@@ -75,8 +75,8 @@ export default function Comparison() {
 
           {rows.map((r) => (
             <div key={r.feature} className="grid grid-cols-3 border-b border-white/5">
-              <div className="p-5 text-white/50">{r.feature}</div>
-              <div className="p-5 text-white/40 border-l border-white/10">
+              <div className="p-5 text-white/65">{r.feature}</div>
+              <div className="p-5 text-white/65 border-l border-white/10">
                 {r.official}
               </div>
               <div className="p-5 text-white/50 border-l border-white/10">

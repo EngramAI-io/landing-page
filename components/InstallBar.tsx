@@ -42,10 +42,10 @@ export default function InstallBar() {
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Install & Run
           </h2>
-          <p className="text-xl text-white/50 leading-relaxed max-w-3xl mx-auto">
-            Sentinel isn’t “zero-config” in production — you’ll typically set a{" "}
-            <span className="text-white/80">WebSocket bind</span> and{" "}
-            <span className="text-white/80">token</span> to protect the
+          <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+            Sentinel isn’t “zero-config” in production - you’ll typically set a{" "}
+            <span className="text-white/100">WebSocket bind</span> and{" "}
+            <span className="text-white/100">token</span> to protect the
             observability endpoint. Execution stays fail-open either way.
           </p>
         </motion.div>
@@ -103,7 +103,7 @@ export default function InstallBar() {
               </Tooltip>
             </TooltipProvider>
 
-            <p className="mt-3 text-sm text-white/40">
+            <p className="mt-3 text-sm text-white/60">
               Alternative installs: Homebrew (tap + install) or pre-built
               binaries from releases.
             </p>

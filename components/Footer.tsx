@@ -16,7 +16,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 text-white/50 hover:text-brand-accent transition-colors"
+              className="flex items-center gap-2 text-white/70 hover:text-brand-accent transition-colors"
               aria-label="GitHub"
             >
               <Github className="w-5 h-5" />
@@ -27,7 +27,7 @@ export default function Footer() {
               href="mailto:security@engramai.io"
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 text-white/50 hover:text-brand-accent transition-colors"
+              className="flex items-center gap-2 text-white/70 hover:text-brand-accent transition-colors"
               aria-label="Security disclosure email"
             >
               <ShieldAlert className="w-5 h-5" />
@@ -37,7 +37,7 @@ export default function Footer() {
 
           <motion.a
             href="mailto:hello@engramai.io"
-            className="flex items-center gap-2 text-white/50 hover:text-brand-accent transition-colors"
+            className="flex items-center gap-2 text-white/70 hover:text-brand-accent transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -45,7 +45,7 @@ export default function Footer() {
             <span className="text-sm">hello@engramai.io</span>
           </motion.a>
 
-          <p className="text-white/50 text-sm text-center md:text-right">
+          <p className="text-white/70 text-sm text-center md:text-right">
             © 2025 EngramAI. Sentinel is MIT licensed.
           </p>
         </div>
@@ -53,7 +53,7 @@ export default function Footer() {
         <div className="mt-8 text-center">
           <Link
             href="#install"
-            className="text-sm text-white/40 hover:text-brand-accent transition-colors"
+            className="text-sm text-white/60 hover:text-brand-accent transition-colors"
           >
             Install Sentinel →
           </Link>

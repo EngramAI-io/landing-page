@@ -104,11 +104,11 @@ export default function Vision() {
           <h2 className="text-5xl md:text-6xl font-bold mb-8 text-white">
             From Observability to Defense.
           </h2>
-          <p className="text-xl md:text-2xl text-white/50 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             Sentinel makes agent toolchains{" "}
             <span className="text-brand-accent">visible</span>. EngramAI is
             building the <span className="text-brand-accent">defense layer</span>{" "}
-            against agentic AI attacks — where trust comes from verifiable
+            against agentic AI attacks - where trust comes from verifiable
             records, not blind faith.
           </p>
         </motion.div>

@@ -55,7 +55,7 @@ export default function Security() {
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Security & Design Philosophy
           </h2>
-          <p className="text-xl md:text-2xl text-white/50 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             Observe, never decide. Record, never enforce. Fail open, not closed.
             Trust comes from visibility, not control.
           </p>
@@ -78,7 +78,7 @@ export default function Security() {
                   <h3 className="text-xl font-bold text-white">{c.title}</h3>
                 </div>
 
-                <p className="text-white/50 mb-6 leading-relaxed">{c.body}</p>
+                <p className="text-white/70 mb-6 leading-relaxed">{c.body}</p>
 
                 <div className="bg-brand-black/50 rounded-lg p-4 border border-white/5">
                   <code className="text-brand-accent text-xs md:text-sm font-mono break-all">

@@ -36,12 +36,12 @@ export default function Features() {
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Sentinel’s Core Guarantees
           </h2>
-          <p className="text-xl md:text-2xl text-white/50 max-w-3xl mx-auto leading-relaxed">
-            Identity answers <span className="text-white/80">who</span>. Ordering
-            answers <span className="text-white/80">in what sequence</span>.
+          <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+            Identity answers <span className="text-white/100">who</span>. Ordering
+            answers <span className="text-white/100">in what sequence</span>.
             Integrity answers{" "}
-            <span className="text-white/80">can we trust the record</span>.
-            Together, they form the minimum foundation for serious observability —
+            <span className="text-white/100">can we trust the record</span>.
+            Together, they form the minimum foundation for serious observability -
             without enforcing policy or constraining agents.
           </p>
         </motion.div>
@@ -65,22 +65,22 @@ export default function Features() {
               </h3>
             </div>
 
-            <p className="text-white/50 text-lg mb-4">
-              A single, consistent, replayable history of agent activity — with
+            <p className="text-white/70 text-lg mb-4">
+              A single, consistent, replayable history of agent activity - with
               stable event IDs and monotonic ordering derived from observation at
               the Sentinel boundary (not wall-clock timestamps).
             </p>
 
             {/* Semantic anchor */}
-            <p className="text-xs uppercase tracking-wide text-white/40 mb-3">
+            <p className="text-xs uppercase tracking-wide text-white/60 mb-3">
               Concurrent tool calls observed at the Sentinel boundary
             </p>
 
             {/* Node Graph SVG */}
-            <div className="relative h-56 w-full">
+            <div className="relative h-56 w-full ">
               <svg
                 viewBox="0 0 400 300"
-                className="w-full h-full"
+                className="w-full h-full -translate-y-10"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 {/* Connections */}
@@ -122,9 +122,9 @@ export default function Features() {
 
               {/* Key property callout */}
               <div className="absolute bottom-3 left-3 right-3 bg-brand-black/40 border border-white/5 rounded-lg p-4">
-                <p className="text-xs md:text-sm text-white/50 leading-relaxed">
+                <p className="text-xs md:text-sm text-white/70 leading-relaxed">
                   Key property: ordering is derived from the sequence of bytes
-                  observed crossing the Sentinel boundary — not timestamps —
+                  observed crossing the Sentinel boundary - not timestamps -
                   allowing a single, replayable history even when async responses
                   race or clocks drift.
                 </p>
@@ -144,18 +144,18 @@ export default function Features() {
               </h3>
             </div>
 
-            <p className="text-white/50 mb-6">
+            <p className="text-white/70 mb-6">
               Stable <span className="text-white/80">session_id</span> and{" "}
               <span className="text-white/80">trace_id</span> for a run, plus{" "}
               <span className="text-white/80">span_id</span> per request with
-              request ↔ response correlation — consistent across tools and errors.
+              request ↔ response correlation - consistent across tools and errors.
             </p>
 
             <div className="bg-brand-black/50 rounded-lg p-4 border border-white/5">
               <code className="text-brand-accent text-sm font-mono">
                 session_id / trace_id / span_id
               </code>
-              <div className="mt-2 text-xs text-white/40">
+              <div className="mt-2 text-xs text-white/70">
                 Without it: logs fragment, attribution breaks, debugging turns
                 into guesswork.
               </div>
@@ -174,9 +174,9 @@ export default function Features() {
               </h3>
             </div>
 
-            <p className="text-white/50 mb-6">
+            <p className="text-white/70 mb-6">
               Hash-chained, append-only audit records with Ed25519 signatures and
-              optional encryption at rest — verifiable offline. Cryptography
+              optional encryption at rest - verifiable offline. Cryptography
               applies only to telemetry, never to execution.
             </p>
 
@@ -184,7 +184,7 @@ export default function Features() {
               <code className="text-brand-accent text-sm font-mono">
                 hash-chain + Ed25519 (+ optional encryption)
               </code>
-              <div className="mt-2 text-xs text-white/40">
+              <div className="mt-2 text-xs text-white/60">
                 Without it: the record can be edited after the fact and you’ll
                 never know.
               </div>
