@@ -28,7 +28,7 @@ export default function Nav() {
           <a
             key={l.href}
             href={l.href}
-            className="text-sm text-white/50 hover:text-brand-accent transition-colors"
+            className="text-sm text-white/70 hover:text-brand-accent transition-colors"
           >
             {l.label}
           </a>
