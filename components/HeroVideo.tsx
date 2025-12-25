@@ -7,7 +7,7 @@ interface HeroVideoProps {
   src?: string;
 }
 
-export default function HeroVideo({ src = "/hero-demo.gif" }: HeroVideoProps) {
+export default function HeroVideo({ src = "/Sentinel_Graph_Demo.gif" }: HeroVideoProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -35,15 +35,15 @@ export default function HeroVideo({ src = "/hero-demo.gif" }: HeroVideoProps) {
             <p className="text-white/30 text-sm">[WIP] Hero Demo GIF</p>
           </div>
           
-          {/* Uncomment when hero-demo.gif is available
+          {
           <Image
-            src="/hero-demo.gif"
+            src="/Sentinel_Graph_Demo.gif"
             alt="Sentinel Demo"
             fill
             className="object-contain"
             priority
           />
-          */}
+          }
         </div>
       </div>
     </motion.div>

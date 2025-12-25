@@ -12,22 +12,19 @@ const DotGrid = () => {
   const [isInView, setIsInView] = useState(false);
   const dots = Array.from({ length: 64 }, (_, i) => i);
 
-  // Pre-calculate positions for deterministic rendering
   const positions = useMemo(() => {
     return dots.map((dot) => {
       const row = Math.floor(dot / 8);
       const col = dot % 8;
-      
-      // Scattered initial positions (deterministic based on index)
-      const offsetX = ((dot * 73) % 200) - 100; // Pseudo-random but deterministic
+
+      const offsetX = ((dot * 73) % 200) - 100;
       const offsetY = ((dot * 127) % 150) - 75;
       const startX = 50 + col * 90 + offsetX;
       const startY = 50 + row * 50 + offsetY;
-      
-      // Grid final positions
+
       const endX = 100 + col * 75;
       const endY = 100 + row * 40;
-      
+
       return { startX, startY, endX, endY, row, col };
     });
   }, [dots]);
@@ -47,15 +44,11 @@ const DotGrid = () => {
             r="4"
             fill="#00FF94"
             initial={{ opacity: 0.3 }}
-            animate={isInView ? {
-              cx: pos.endX,
-              cy: pos.endY,
-              opacity: 0.8,
-            } : {
-              cx: pos.startX,
-              cy: pos.startY,
-              opacity: 0.3,
-            }}
+            animate={
+              isInView
+                ? { cx: pos.endX, cy: pos.endY, opacity: 0.8 }
+                : { cx: pos.startX, cy: pos.startY, opacity: 0.3 }
+            }
             transition={{
               duration: 1.5,
               delay: dot * 0.02,
@@ -63,36 +56,35 @@ const DotGrid = () => {
             }}
           />
         ))}
-        
-        {/* Connection lines when organized */}
-        {isInView && positions.flatMap((pos, i) => {
-          // Connect to adjacent dots
-          const neighbors: Neighbor[] = [
-            pos.col < 7 ? { row: pos.row, col: pos.col + 1 } : null,
-            pos.row < 7 ? { row: pos.row + 1, col: pos.col } : null,
-          ].filter((n): n is Neighbor => n !== null);
 
-          return neighbors.map((neighbor, idx) => {
-            const nX = 100 + neighbor.col * 75;
-            const nY = 100 + neighbor.row * 40;
+        {isInView &&
+          positions.flatMap((pos, i) => {
+            const neighbors: Neighbor[] = [
+              pos.col < 7 ? { row: pos.row, col: pos.col + 1 } : null,
+              pos.row < 7 ? { row: pos.row + 1, col: pos.col } : null,
+            ].filter((n): n is Neighbor => n !== null);
 
-            return (
-              <motion.line
-                key={`${i}-${idx}`}
-                x1={pos.endX}
-                y1={pos.endY}
-                x2={nX}
-                y2={nY}
-                stroke="#00FF94"
-                strokeWidth="1"
-                opacity={0.2}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.2 }}
-                transition={{ delay: 1 + i * 0.01 }}
-              />
-            );
-          });
-        })}
+            return neighbors.map((neighbor, idx) => {
+              const nX = 100 + neighbor.col * 75;
+              const nY = 100 + neighbor.row * 40;
+
+              return (
+                <motion.line
+                  key={`${i}-${idx}`}
+                  x1={pos.endX}
+                  y1={pos.endY}
+                  x2={nX}
+                  y2={nY}
+                  stroke="#00FF94"
+                  strokeWidth="1"
+                  opacity={0.2}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.2 }}
+                  transition={{ delay: 1 + i * 0.01 }}
+                />
+              );
+            });
+          })}
       </svg>
     </div>
   );
@@ -110,11 +102,14 @@ export default function Vision() {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-bold mb-8 text-white">
-            Sentinel is just the beginning.
+            From Observability to Defense.
           </h2>
           <p className="text-xl md:text-2xl text-white/50 max-w-3xl mx-auto leading-relaxed">
-            EngramAI is building the <span className="text-brand-accent">Memory Layer</span> for the Agentic Web. 
-            Transform scattered data into structured intelligence, enabling AI agents to remember, learn, and evolve.
+            Sentinel makes agent toolchains{" "}
+            <span className="text-brand-accent">visible</span>. EngramAI is
+            building the <span className="text-brand-accent">defense layer</span>{" "}
+            against agentic AI attacks — where trust comes from verifiable
+            records, not blind faith.
           </p>
         </motion.div>
 
