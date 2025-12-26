@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, ExternalLink } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -11,17 +11,19 @@ import {
 } from "@/components/ui/tooltip";
 import { copyToClipboard } from "@/lib/utils";
 
-const installCommand =
-  "curl -sSL https://raw.githubusercontent.com/EngramAI-io/Core/main/install.sh | bash";
+const installCommandUnix =
+  "curl -fsSL https://raw.githubusercontent.com/EngramAI-io/Core/main/install.sh | sh";
 
-const runCommand =
-  'sentinel run --ws-bind "127.0.0.1:3000" --ws-token "secret123" -- npx -y @modelcontextprotocol/server-filesystem';
+const installCommandWindows =
+  "iwr https://raw.githubusercontent.com/EngramAI-io/Core/main/install.ps1 -UseBasicParsing | iex";
 
 export default function InstallBar() {
-  const [copied, setCopied] = useState<"install" | "run" | null>(null);
+  const [copied, setCopied] = useState<"unix" | "windows" | null>(null);
 
-  const handleCopy = async (which: "install" | "run") => {
-    const cmd = which === "install" ? installCommand : runCommand;
+  const handleCopy = async (which: "unix" | "windows") => {
+    const cmd =
+      which === "unix" ? installCommandUnix : installCommandWindows;
+
     const success = await copyToClipboard(cmd);
     if (success) {
       setCopied(which);
@@ -40,18 +42,16 @@ export default function InstallBar() {
           className="text-center mb-12"
         >
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">
-            Install & Run
+            Install Sentinel
           </h2>
           <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
-            Sentinel isn’t “zero-config” in production - you’ll typically set a{" "}
-            <span className="text-white/100">WebSocket bind</span> and{" "}
-            <span className="text-white/100">token</span> to protect the
-            observability endpoint. Execution stays fail-open either way.
+            Sentinel installs as a single binary.  
+            The core interceptor runs headless; the observability UI connects separately.
           </p>
         </motion.div>
 
         <div className="space-y-6">
-          {/* Install */}
+          {/* Linux / macOS */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -59,24 +59,24 @@ export default function InstallBar() {
             transition={{ duration: 0.7 }}
           >
             <TooltipProvider>
-              <Tooltip open={copied === "install"}>
+              <Tooltip open={copied === "unix"}>
                 <TooltipTrigger asChild>
                   <button
-                    onClick={() => handleCopy("install")}
+                    onClick={() => handleCopy("unix")}
                     className="w-full text-left bg-brand-gray/50 border border-white/10 rounded-lg p-6 hover:border-brand-accent/50 transition-all duration-300 group"
                   >
                     <div className="flex items-center justify-between gap-6">
                       <div className="flex items-center gap-3 min-w-0">
                         <span className="text-brand-accent font-mono">$</span>
                         <code className="text-white font-mono text-sm md:text-lg break-all">
-                          {installCommand}
+                          {installCommandUnix}
                         </code>
                       </div>
 
                       <AnimatePresence mode="wait">
-                        {copied === "install" ? (
+                        {copied === "unix" ? (
                           <motion.div
-                            key="check"
+                            key="check-unix"
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0 }}
@@ -85,7 +85,7 @@ export default function InstallBar() {
                           </motion.div>
                         ) : (
                           <motion.div
-                            key="copy"
+                            key="copy-unix"
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0 }}
@@ -103,13 +103,10 @@ export default function InstallBar() {
               </Tooltip>
             </TooltipProvider>
 
-            <p className="mt-3 text-sm text-white/60">
-              Alternative installs: Homebrew (tap + install) or pre-built
-              binaries from releases.
-            </p>
+            <p className="mt-3 text-sm text-white/60">(Linux / macOS)</p>
           </motion.div>
 
-          {/* Run */}
+          {/* Windows */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -117,24 +114,24 @@ export default function InstallBar() {
             transition={{ duration: 0.7, delay: 0.05 }}
           >
             <TooltipProvider>
-              <Tooltip open={copied === "run"}>
+              <Tooltip open={copied === "windows"}>
                 <TooltipTrigger asChild>
                   <button
-                    onClick={() => handleCopy("run")}
+                    onClick={() => handleCopy("windows")}
                     className="w-full text-left bg-brand-gray/50 border border-white/10 rounded-lg p-6 hover:border-brand-accent/50 transition-all duration-300 group"
                   >
                     <div className="flex items-center justify-between gap-6">
                       <div className="flex items-center gap-3 min-w-0">
                         <span className="text-brand-accent font-mono">$</span>
                         <code className="text-white font-mono text-sm md:text-lg break-all">
-                          {runCommand}
+                          {installCommandWindows}
                         </code>
                       </div>
 
                       <AnimatePresence mode="wait">
-                        {copied === "run" ? (
+                        {copied === "windows" ? (
                           <motion.div
-                            key="check2"
+                            key="check-win"
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0 }}
@@ -143,7 +140,7 @@ export default function InstallBar() {
                           </motion.div>
                         ) : (
                           <motion.div
-                            key="copy2"
+                            key="copy-win"
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0 }}
@@ -161,26 +158,26 @@ export default function InstallBar() {
               </Tooltip>
             </TooltipProvider>
 
-            <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-brand-black/40 border border-white/5 rounded-lg p-4">
-                <p className="text-sm text-white/70 font-medium mb-1">Dashboard</p>
-                <p className="text-sm text-white/40">Open http://localhost:3000</p>
-              </div>
+            <p className="mt-3 text-sm text-white/60">(Windows PowerShell)</p>
+          </motion.div>
 
-              <div className="bg-brand-black/40 border border-white/5 rounded-lg p-4">
-                <p className="text-sm text-white/70 font-medium mb-1">WebSocket</p>
-                <p className="text-sm text-white/40">
-                  ws://localhost:3000/ws?token=secret123
-                </p>
-              </div>
-
-              <div className="bg-brand-black/40 border border-white/5 rounded-lg p-4">
-                <p className="text-sm text-white/70 font-medium mb-1">Fail-open</p>
-                <p className="text-sm text-white/40">
-                  UI drops? Proxy still passes traffic.
-                </p>
-              </div>
-            </div>
+          {/* GitHub CTA */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="pt-6 text-center"
+          >
+            <a
+              href="https://github.com/EngramAI-io/Core"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-brand-accent hover:underline"
+            >
+              <span>Detailed install & usage instructions on GitHub</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
           </motion.div>
         </div>
       </div>
