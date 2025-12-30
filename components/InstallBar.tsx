@@ -12,10 +12,10 @@ import {
 import { copyToClipboard } from "@/lib/utils";
 
 const installCommandUnix =
-  "curl -fsSL https://raw.githubusercontent.com/EngramAI-io/Core/main/install.sh | sh";
+  "curl -fsSL https://raw.githubusercontent.com/EngramAI-io/sentinel/main/install.sh | sh";
 
 const installCommandWindows =
-  "iwr https://raw.githubusercontent.com/EngramAI-io/Core/main/install.ps1 -UseBasicParsing | iex";
+  "iwr https://raw.githubusercontent.com/EngramAI-io/sentinel/main/install.ps1 -UseBasicParsing | iex";
 
 export default function InstallBar() {
   const [copied, setCopied] = useState<"unix" | "windows" | null>(null);
