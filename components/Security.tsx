@@ -100,7 +100,7 @@ export default function Security() {
           <h3 className="text-2xl font-bold text-white mb-3">
             Architecture (Transparent Sidecar / “T-Tap”)
           </h3>
-          <p className="text-white/50 leading-relaxed">
+          <p className="text-white/80 leading-relaxed">
             Sentinel sits between an LLM client and MCP tools, pass-throughing
             JSON-RPC while emitting a canonical event stream to the UI and durable
             audit logs. It’s designed to be non-invasive: telemetry is secured,
@@ -110,15 +110,15 @@ export default function Security() {
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-brand-black/40 border border-white/5 rounded-lg p-4">
               <p className="text-white/70 font-medium mb-1">Pattern</p>
-              <p className="text-white/40 text-sm">Transparent Sidecar (T-Tap)</p>
+              <p className="text-white/80 text-sm">Transparent Sidecar (T-Tap)</p>
             </div>
             <div className="bg-brand-black/40 border border-white/5 rounded-lg p-4">
               <p className="text-white/70 font-medium mb-1">Philosophy</p>
-              <p className="text-white/40 text-sm">Fail Open</p>
+              <p className="text-white/80 text-sm">Fail Open</p>
             </div>
             <div className="bg-brand-black/40 border border-white/5 rounded-lg p-4">
               <p className="text-white/70 font-medium mb-1">Stack</p>
-              <p className="text-white/40 text-sm">
+              <p className="text-white/80 text-sm">
                 Rust (Tokio) • TypeScript • React • React Flow • WebSockets
               </p>
             </div>
