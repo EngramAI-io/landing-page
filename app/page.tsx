@@ -2,12 +2,13 @@
 
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Features from "@/components/Features";
-import WhatIs from "@/components/WhatIs";
-import Comparison from "@/components/Comparison";
-import Security from "@/components/Security";
-import Vision from "@/components/Vision";
-import InstallBar from "@/components/InstallBar";
+import Benefits from "@/components/Benefits";
+import Products from "@/components/Products";
+import Platform from "@/components/Platform";
+import BOGSection from "@/components/BOGSection";
+import MemGuardSection from "@/components/MemGuardSection";
+import SentinelSection from "@/components/SentinelSection";
+import BookDemo from "@/components/BookDemo";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -15,12 +16,13 @@ export default function Home() {
     <main className="min-h-screen bg-brand-black">
       <Nav />
       <Hero />
-      <Features />
-      <WhatIs />
-      <Comparison />
-      <Security />
-      <Vision />
-      <InstallBar />
+      <Benefits />
+      <Products />
+      <Platform />
+      <BOGSection />
+      <MemGuardSection />
+      <SentinelSection />
+      <BookDemo />
       <Footer />
     </main>
   );
