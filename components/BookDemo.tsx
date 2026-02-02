@@ -76,7 +76,7 @@ export default function BookDemo() {
 
             {/* What's included */}
             <div className="mb-8">
-              <h3 className="text-white font-semibold mb-4">What's included:</h3>
+              <h3 className="text-white font-semibold mb-4">What’s included:</h3>
               <div className="space-y-3">
                 {demoIncludes.map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
@@ -131,7 +131,7 @@ export default function BookDemo() {
                     <Mail className="w-10 h-10 text-brand-black" />
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                    Let's Talk
+                    Let’s Talk
                   </h3>
                   <p className="text-white/60">
                     Reach out to schedule your personalized demo

@@ -57,7 +57,7 @@ export default function Hero() {
         </h1>
 
         <p className="text-xl md:text-2xl text-white/70 mb-4 max-w-4xl mx-auto leading-relaxed">
-          The industry's first comprehensive security platform to protect{" "}
+          The industry’s first comprehensive security platform to protect{" "}
           <span className="text-white font-semibold">AI Agents</span>,{" "}
           <span className="text-white font-semibold">RAG Systems</span>, and{" "}
           <span className="text-white font-semibold">MCP Servers</span> for the enterprise.

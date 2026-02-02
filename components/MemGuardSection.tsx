@@ -145,7 +145,7 @@ export default function MemGuardSection() {
 
             <div className="mt-8 p-4 bg-violet-500/10 border border-violet-500/20 rounded-xl text-center">
               <p className="text-violet-300 text-sm">
-                <strong>Key Insight:</strong> AgentPoison triggers look NORMAL in text but form tight clusters in embedding space (>0.95 similarity). 
+                <strong>Key Insight:</strong> AgentPoison triggers look NORMAL in text but form tight clusters in embedding space ({'>'}0.95 similarity). 
                 MemGuard compares embeddings to detect these anomalous clusters.
               </p>
             </div>

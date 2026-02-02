@@ -16,7 +16,7 @@ export default function Footer() {
               <span className="text-xs text-brand-accent uppercase tracking-widest">Defense Layer</span>
             </div>
             <p className="text-white/50 mb-6 max-w-md">
-              The industry's first multi-agent security platform to protect AI agents, 
+              The industry’s first multi-agent security platform to protect AI agents, 
               RAG systems, and MCP servers for the enterprise.
             </p>
             <div className="flex items-center gap-4">
