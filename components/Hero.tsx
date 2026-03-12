@@ -2,14 +2,10 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Shield, Layers, Building2, User, Sparkles } from "lucide-react";
+import { Shield, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function Hero() {
-  const scrollToProducts = () => {
-    const el = document.getElementById("products");
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   const scrollToDemo = () => {
     const el = document.getElementById("demo");
     el?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -49,15 +45,15 @@ export default function Hero() {
         </motion.div>
 
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-8 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent leading-[1.1]">
-          Multi-Agent Security
+          The Trust Layer for
           <br />
           <span className="bg-gradient-to-r from-brand-accent via-brand-accent to-emerald-400 bg-clip-text text-transparent">
-            Platform
+            Agentic AI
           </span>
         </h1>
 
         <p className="text-xl md:text-2xl text-white/70 mb-4 max-w-4xl mx-auto leading-relaxed">
-          The industry’s first comprehensive security platform to protect{" "}
+          The industry&#39;s first comprehensive security platform to protect{" "}
           <span className="text-white font-semibold">AI Agents</span>,{" "}
           <span className="text-white font-semibold">RAG Systems</span>, and{" "}
           <span className="text-white font-semibold">MCP Servers</span> for the enterprise.
@@ -77,9 +73,11 @@ export default function Hero() {
             Book a Demo
           </Button>
 
-          <Button size="lg" variant="outline" className="text-lg px-8" onClick={scrollToProducts}>
-            <Shield className="w-5 h-5 mr-2" />
-            Explore Products
+          <Button size="lg" variant="outline" className="text-lg px-8" asChild>
+            <Link href="#products">
+              <Shield className="w-5 h-5 mr-2" />
+              Explore Products
+            </Link>
           </Button>
         </motion.div>
 
@@ -93,8 +91,8 @@ export default function Hero() {
           {[
             { value: "100%", label: "Detection Accuracy", highlight: true },
             { value: "<5ms", label: "Detection Latency" },
-            { value: "3", label: "Attack Surfaces Covered" },
             { value: "99.99%", label: "Uptime SLA" },
+            { value: "10K+", label: "RPS Throughput at Scale" },
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <div className={`text-2xl md:text-3xl font-bold mb-1 ${stat.highlight ? 'text-brand-accent' : 'text-white'}`}>

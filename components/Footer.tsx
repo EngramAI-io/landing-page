@@ -13,10 +13,10 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <span className="text-2xl font-bold text-white">EngramAI</span>
-              <span className="text-xs text-brand-accent uppercase tracking-widest">Defense Layer</span>
+              <span className="text-xs text-brand-accent uppercase tracking-widest">Trust Protocol</span>
             </div>
             <p className="text-white/50 mb-6 max-w-md">
-              The industry’s first multi-agent security platform to protect AI agents, 
+              The industry&#39;s first trust layer for agentic AI — protecting AI agents, 
               RAG systems, and MCP servers for the enterprise.
             </p>
             <div className="flex items-center gap-4">
@@ -39,27 +39,22 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Products</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#bog" className="text-white/50 hover:text-brand-accent transition-colors text-sm flex items-center gap-2">
-                  BOG - Consensus
-                  <span className="text-[10px] px-1.5 py-0.5 bg-white/10 rounded text-white/40">Enterprise</span>
-                </a>
-              </li>
-              <li>
-                <a href="#memguard" className="text-white/50 hover:text-brand-accent transition-colors text-sm flex items-center gap-2">
-                  MemGuard - RAG Security
-                  <span className="text-[10px] px-1.5 py-0.5 bg-white/10 rounded text-white/40">Enterprise</span>
-                </a>
-              </li>
-              <li>
-                <a href="#sentinel" className="text-white/50 hover:text-brand-accent transition-colors text-sm flex items-center gap-2">
-                  Sentinel - MCP Observability
+                <Link href="/products/sentinel" className="text-white/50 hover:text-brand-accent transition-colors text-sm flex items-center gap-2">
+                  Sentinel — MCP Observability
                   <span className="text-[10px] px-1.5 py-0.5 bg-brand-accent/20 rounded text-brand-accent">MIT</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#platform" className="text-white/50 hover:text-brand-accent transition-colors text-sm">
-                  Platform
-                </a>
+                <Link href="/products/memguard" className="text-white/50 hover:text-brand-accent transition-colors text-sm flex items-center gap-2">
+                  MemGuard — RAG Security
+                  <span className="text-[10px] px-1.5 py-0.5 bg-white/10 rounded text-white/40">Enterprise</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/bog" className="text-white/50 hover:text-brand-accent transition-colors text-sm flex items-center gap-2">
+                  BOG — Consensus
+                  <span className="text-[10px] px-1.5 py-0.5 bg-white/10 rounded text-white/40">Enterprise</span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -102,7 +97,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-sm">
-            © 2026 EngramAI. All rights reserved. BOG & MemGuard are proprietary.
+            &copy; 2026 EngramAI. All rights reserved. BOG &amp; MemGuard are proprietary.
           </p>
           <div className="flex items-center gap-6">
             <span className="text-white/40 text-sm">Sentinel is MIT licensed</span>

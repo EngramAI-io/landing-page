@@ -3,9 +3,9 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sentinel - MCP Observability Sidecar by EngramAI",
+  title: "EngramAI — The Trust Layer for Agentic AI",
   description:
-    "A transparent, fail-open observability sidecar for Model Context Protocol (MCP). Identity, ordering, and integrity guarantees for agent ↔ tool interactions — without modifying execution.",
+    "The industry's first comprehensive security platform to protect AI Agents, RAG Systems, and MCP Servers for the enterprise. Deploy as multi-tenant SaaS or dedicated single-tenant infrastructure.",
 };
 
 export default function RootLayout({
