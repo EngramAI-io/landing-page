@@ -2,12 +2,15 @@
 
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Benefits from "@/components/Benefits";
-import Products from "@/components/Products";
-import Platform from "@/components/Platform";
-import BOGSection from "@/components/BOGSection";
-import MemGuardSection from "@/components/MemGuardSection";
-import SentinelSection from "@/components/SentinelSection";
+import TrustDiagram from "@/components/TrustDiagram";
+import CoreFeatures from "@/components/CoreFeatures";
+import ComplianceBadges from "@/components/ComplianceBadges";
+import BusinessValue from "@/components/BusinessValue";
+import ProblemSection from "@/components/ProblemSection";
+import AgentPassport from "@/components/AgentPassport";
+import HowItWorks from "@/components/HowItWorks";
+import EnterpriseUseCases from "@/components/EnterpriseUseCases";
+import FinalCTA from "@/components/FinalCTA";
 import BookDemo from "@/components/BookDemo";
 import Footer from "@/components/Footer";
 
@@ -16,12 +19,15 @@ export default function Home() {
     <main className="min-h-screen bg-brand-black">
       <Nav />
       <Hero />
-      <Benefits />
-      <Products />
-      <Platform />
-      <BOGSection />
-      <MemGuardSection />
-      <SentinelSection />
+      <TrustDiagram />
+      <CoreFeatures />
+      <ComplianceBadges />
+      <BusinessValue />
+      <ProblemSection />
+      <AgentPassport />
+      <HowItWorks />
+      <EnterpriseUseCases />
+      <FinalCTA />
       <BookDemo />
       <Footer />
     </main>

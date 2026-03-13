@@ -2,19 +2,32 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 
-const navLinks = [
-  { label: "Benefits", href: "#benefits" },
-  { label: "Products", href: "#products" },
-  { label: "Platform", href: "#platform" },
+const productLinks = [
+  { label: "Sentinel", href: "/products/sentinel", desc: "MCP Observability Sidecar" },
+  { label: "MemGuard", href: "/products/memguard", desc: "Memory Poisoning Detection" },
+  { label: "BOG", href: "/products/bog", desc: "Behavioral Orchestration Graph" },
 ];
 
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setProductsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <motion.nav 
@@ -38,22 +51,65 @@ export default function Nav() {
           </div>
           <div className="flex flex-col">
             <span className="text-lg font-bold text-white">EngramAI</span>
-            <span className="text-[9px] text-brand-accent uppercase tracking-widest">Defense Layer</span>
+            <span className="text-[9px] text-brand-accent uppercase tracking-widest">Trust Protocol</span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-8">
-          {navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-white/70 hover:text-brand-accent transition-colors relative group"
+          <Link
+            href="/"
+            className="text-sm text-white/70 hover:text-brand-accent transition-colors relative group"
+          >
+            Home
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent group-hover:w-full transition-all duration-300" />
+          </Link>
+
+          {/* Products Dropdown */}
+          <div ref={dropdownRef} className="relative">
+            <button
+              onClick={() => setProductsOpen(!productsOpen)}
+              className="flex items-center gap-1 text-sm text-white/70 hover:text-brand-accent transition-colors relative group"
             >
-              {l.label}
+              Products
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${productsOpen ? "rotate-180" : ""}`} />
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent group-hover:w-full transition-all duration-300" />
-            </a>
-          ))}
+            </button>
+
+            <AnimatePresence>
+              {productsOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-brand-gray/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden"
+                >
+                  {productLinks.map((p) => (
+                    <Link
+                      key={p.href}
+                      href={p.href}
+                      onClick={() => setProductsOpen(false)}
+                      className="block px-5 py-3.5 hover:bg-brand-accent/10 transition-colors border-b border-white/5 last:border-0"
+                    >
+                      <span className="text-white font-medium text-sm">{p.label}</span>
+                      <span className="block text-white/40 text-xs mt-0.5">{p.desc}</span>
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <a
+            href="https://github.com/EngramAI-io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-white/70 hover:text-brand-accent transition-colors relative group"
+          >
+            Docs
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent group-hover:w-full transition-all duration-300" />
+          </a>
         </div>
 
         <div className="flex items-center gap-4">
@@ -86,17 +142,56 @@ export default function Nav() {
           animate={{ opacity: 1, y: 0 }}
           className="lg:hidden bg-brand-black/95 border-b border-white/10 px-6 py-4"
         >
-          <div className="flex flex-col gap-4">
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="text-white/70 hover:text-brand-accent transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {l.label}
-              </a>
-            ))}
+          <div className="flex flex-col gap-2">
+            <Link
+              href="/"
+              className="text-white/70 hover:text-brand-accent transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+
+            <button
+              className="flex items-center justify-between text-white/70 hover:text-brand-accent transition-colors py-2"
+              onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+            >
+              Products
+              <ChevronDown className={`w-4 h-4 transition-transform ${mobileProductsOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            <AnimatePresence>
+              {mobileProductsOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="pl-4 overflow-hidden"
+                >
+                  {productLinks.map((p) => (
+                    <Link
+                      key={p.href}
+                      href={p.href}
+                      className="block text-white/50 hover:text-brand-accent transition-colors py-2 text-sm"
+                      onClick={() => { setMobileMenuOpen(false); setMobileProductsOpen(false); }}
+                    >
+                      {p.label}
+                      <span className="text-white/30 text-xs ml-2">— {p.desc}</span>
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <a
+              href="https://github.com/EngramAI-io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/70 hover:text-brand-accent transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Docs
+            </a>
+
             <Button size="sm" className="w-full mt-2 bg-brand-accent text-brand-black" asChild>
               <a href="#demo" onClick={() => setMobileMenuOpen(false)}>Book Demo</a>
             </Button>
