@@ -45,7 +45,7 @@ export default function Hero() {
         </motion.div>
 
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-8 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent leading-[1.1]">
-          The Trust Layer for
+          EngramAI: The Trust Layer for
           <br />
           <span className="bg-gradient-to-r from-brand-accent via-brand-accent to-emerald-400 bg-clip-text text-transparent">
             Agentic AI
@@ -53,10 +53,10 @@ export default function Hero() {
         </h1>
 
         <p className="text-xl md:text-2xl text-white/70 mb-4 max-w-4xl mx-auto leading-relaxed">
-          The industry&#39;s first comprehensive security platform to protect{" "}
-          <span className="text-white font-semibold">AI Agents</span>,{" "}
-          <span className="text-white font-semibold">RAG Systems</span>, and{" "}
-          <span className="text-white font-semibold">MCP Servers</span> for the enterprise.
+          Enterprise security for{" "}
+          <span className="text-white font-semibold">AI agents</span>,{" "}
+          <span className="text-white font-semibold">RAG systems</span>, and{" "}
+          <span className="text-white font-semibold">MCP servers</span>.
         </p>
 
         <p className="text-lg text-white/50 mb-8 max-w-3xl mx-auto">
