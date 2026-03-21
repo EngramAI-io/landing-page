@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Mail, ShieldAlert, Calendar } from "lucide-react";
+import { Github, Linkedin, Mail, ShieldAlert, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Footer() {
@@ -30,6 +30,17 @@ export default function Footer() {
               >
                 <Github className="w-4 h-4" />
                 <span className="text-sm">GitHub</span>
+              </motion.a>
+              <motion.a
+                href="https://www.linkedin.com/company/engramai-ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-2 px-4 py-2 bg-brand-gray/50 border border-white/10 rounded-lg text-white/70 hover:text-brand-accent hover:border-brand-accent/30 transition-all"
+              >
+                <Linkedin className="w-4 h-4" />
+                <span className="text-sm">LinkedIn</span>
               </motion.a>
             </div>
           </div>

@@ -25,7 +25,7 @@ export default function TrustDiagram() {
             {!imgError ? (
               <Image
                 src="/trust-protocol-diagram.jpg"
-                alt="Engram AI Trust Protocol — The Trust Layer for Agentic AI"
+                alt="EngramAI Trust Protocol — The Trust Layer for Agentic AI"
                 width={800}
                 height={800}
                 className="w-full max-w-[700px] h-auto rounded-xl"
