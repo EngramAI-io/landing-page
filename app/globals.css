@@ -10,6 +10,7 @@
 
 html {
   color-scheme: dark;
+  overflow-x: hidden;
 }
 
 body {
@@ -17,6 +18,7 @@ body {
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar for cyberpunk feel */
@@ -45,4 +47,13 @@ html {
 /* Selection color */
 ::selection {
   @apply bg-brand-accent/30 text-white;
+}
+
+/* Hide scrollbars on iframe for hero */
+iframe {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+iframe::-webkit-scrollbar {
+  display: none;
 }

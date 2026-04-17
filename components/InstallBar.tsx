@@ -172,7 +172,7 @@ export default function InstallBar() {
             <a
               href="https://github.com/EngramAI-io/Core"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-brand-accent hover:underline"
             >
               <span>Detailed install & usage instructions on GitHub</span>

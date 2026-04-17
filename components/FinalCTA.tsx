@@ -6,7 +6,7 @@ import { Shield, ArrowRight } from "lucide-react";
 
 export default function FinalCTA() {
   return (
-    <section className="py-32 px-8 relative overflow-hidden">
+    <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-accent/[0.05] via-transparent to-transparent" />
 
       <div className="max-w-5xl mx-auto relative z-10">
@@ -17,12 +17,12 @@ export default function FinalCTA() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <div className="relative inline-block mb-10">
+          <div className="relative inline-block mb-8 sm:mb-10">
             <div className="absolute -inset-4 bg-brand-accent/10 rounded-full blur-2xl" />
-            <Shield className="w-16 h-16 text-brand-accent relative" />
+            <Shield className="w-12 h-12 sm:w-16 sm:h-16 text-brand-accent relative" />
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 text-white leading-tight">
             We Don&#39;t Build Agents.
             <br />
             <span className="bg-gradient-to-r from-brand-accent to-emerald-400 bg-clip-text text-transparent">
@@ -30,7 +30,7 @@ export default function FinalCTA() {
             </span>
           </h2>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 text-lg md:text-xl mb-10">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 lg:gap-8 text-sm sm:text-base lg:text-xl mb-6 sm:mb-10">
             <span className="text-white/70">Identity first</span>
             <span className="text-brand-accent">•</span>
             <span className="text-white/70">Task scoped</span>
@@ -38,19 +38,19 @@ export default function FinalCTA() {
             <span className="text-white/70">Self destructing</span>
           </div>
 
-          <p className="text-white/50 text-lg mb-10">
+          <p className="text-white/50 text-sm sm:text-base lg:text-lg mb-6 sm:mb-10">
             That is the Engram Protocol standard.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="text-lg px-12 bg-brand-accent text-brand-black hover:bg-brand-accent/90" asChild>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <Button size="lg" className="text-base sm:text-lg px-8 sm:px-12 w-full sm:w-auto bg-brand-accent text-brand-black hover:bg-brand-accent/90" asChild>
               <a href="mailto:hello@engramai.io?subject=Demo Request - EngramAI">
                 Book a Demo
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
               </a>
             </Button>
 
-            <Button size="lg" variant="outline" className="text-lg px-8" asChild>
+            <Button size="lg" variant="outline" className="text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto" asChild>
               <a href="https://github.com/EngramAI-io" target="_blank" rel="noopener noreferrer">
                 Read the Architecture
               </a>
