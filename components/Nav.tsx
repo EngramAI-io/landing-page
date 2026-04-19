@@ -8,9 +8,9 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 const productLinks = [
-  { label: "Sentinel", href: "/products/sentinel", desc: "MCP Observability Sidecar" },
-  { label: "MemGuard", href: "/products/memguard", desc: "Memory Poisoning Detection" },
-  { label: "BOG", href: "/products/bog", desc: "Behavioral Orchestration Graph" },
+  { label: "Lineage", href: "https://github.com/EngramAI-io/lineage", desc: "AI-attributed Linux EDR overlay" },
+  { label: "Benchmark Harness", href: "https://github.com/EngramAI-io/lineage/tree/main/bench/harness", desc: "Open-source eval framework" },
+  { label: "Scorecard", href: "https://github.com/EngramAI-io/lineage/blob/main/bench/SCORECARD.md", desc: "NDA-gated accuracy benchmark" },
 ];
 
 export default function Nav() {
@@ -50,8 +50,8 @@ export default function Nav() {
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-lg font-bold text-white">EngramAI</span>
-            <span className="text-[9px] text-brand-accent uppercase tracking-widest">Trust Protocol</span>
+            <span className="text-lg font-bold text-white">Lineage</span>
+            <span className="text-[9px] text-brand-accent uppercase tracking-widest">by EngramAI</span>
           </div>
         </Link>
 
@@ -102,7 +102,7 @@ export default function Nav() {
           </div>
 
           <a
-            href="https://github.com/EngramAI-io"
+            href="https://github.com/EngramAI-io/lineage"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-white/70 hover:text-brand-accent transition-colors relative group"
@@ -114,7 +114,7 @@ export default function Nav() {
 
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com/EngramAI-io"
+            href="https://github.com/EngramAI-io/lineage"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:block text-sm text-white/70 hover:text-brand-accent transition-colors"
@@ -183,7 +183,7 @@ export default function Nav() {
             </AnimatePresence>
 
             <a
-              href="https://github.com/EngramAI-io"
+              href="https://github.com/EngramAI-io/lineage"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/70 hover:text-brand-accent transition-colors py-2"

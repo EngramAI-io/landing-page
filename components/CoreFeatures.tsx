@@ -1,70 +1,57 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Fingerprint, 
-  Key, 
+import {
+  Layers,
+  ScanSearch,
   ShieldCheck,
-  Activity,
-  Lock,
-  FileCheck
+  Gavel,
+  ArrowRight,
 } from "lucide-react";
 
 const pillars = [
   {
-    icon: Fingerprint,
-    title: "Agent Identity (DID)",
-    description: "Cryptographically-rooted identity using Ed25519. Every agent gets a unique, unforgeable identifier.",
+    icon: Layers,
+    title: "Intent Ingestion",
+    description:
+      "Pulls LLM reasoning, tool calls, and system prompts from Langfuse (or OpenTelemetry GenAI). Normalises everything into a typed AgentRun keyed by trace ID.",
     color: "#4fd1c5",
+    tags: ["Langfuse REST API", "OTel GenAI", "TraceID propagation"],
   },
   {
-    icon: Key,
-    title: "Task-Scoped Keys",
-    description: "Ephemeral identities bound to single tasks. Keys self-destruct after 15 minutes — zero standing privileges.",
+    icon: ScanSearch,
+    title: "EDR Attribution",
+    description:
+      "Joins kernel events from your existing EDR to the right AgentRun via process-tree lineage and LINEAGE_TRACE_ID env propagation. Fallback eBPF sensor for agent-only hosts.",
     color: "#d8a24b",
+    tags: ["Zero new sensor footprint", "LINEAGE_TRACE_ID", "Process tree join", "eBPF fallback"],
   },
   {
     icon: ShieldCheck,
-    title: "Intent Firewall",
-    description: "Embedding-based semantic verification. Every action is validated against declared intent before execution.",
+    title: "Deterministic Policy Engine",
+    description:
+      "12-step deterministic evaluation across 7 rule categories: privilege escalation, secret access, exfil shape, effect conformance, sequence chains. Zero false positives on configured rules.",
     color: "#4fd1c5",
+    tags: ["RULE_PRIV_ESC_001", "RULE_SECRET_004", "RULE_EXFIL_007", "Immutable audit log"],
   },
   {
-    icon: Lock,
-    title: "Policy Engine",
-    description: "Deterministic rule-based security. Privilege escalation detection, sequence tracking, immutable audit logs.",
+    icon: Gavel,
+    title: "LLM Judge (3 Tiers)",
+    description:
+      "Schema-constrained JSON verdict from DeepSeek-R1 / Qwen3 via OpenRouter. Fast (<500ms) inline gate, Standard (2-8s) for ambiguous cases, Deep (10-60s) for analyst review. Fail-closed.",
     color: "#4fd1c5",
-  },
-  {
-    icon: Activity,
-    title: "Trust Scoring",
-    description: "Behavioral FICO score for agents. Continuously updated based on observed behavior across interactions.",
-    color: "#4fd1c5",
-  },
-  {
-    icon: FileCheck,
-    title: "Verifiable Credentials",
-    description: "W3C-compliant VCs for capabilities, provenance, and behavioral scope. Cryptographically signed attestations.",
-    color: "#4fd1c5",
+    tags: ["JSON schema enforced", "Fail-closed", "3 latency tiers", "OpenRouter"],
   },
 ];
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5 },
-  },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5 } },
 };
 
 export default function CoreFeatures() {
@@ -81,12 +68,11 @@ export default function CoreFeatures() {
           className="text-center mb-10 sm:mb-16 lg:mb-20"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white">
-            The EngramAI{" "}
-            <span className="text-brand-accent">Protocol</span>
+            Three Capabilities.{" "}
+            <span className="text-brand-accent">Nothing More.</span>
           </h2>
           <p className="text-sm sm:text-base lg:text-xl text-white/60 max-w-3xl mx-auto leading-relaxed px-2">
-            Five interlocking security layers that give every AI agent a verifiable identity, 
-            scoped permissions, and a behavioral credit score.
+            Lineage adds exactly one thing on top of your existing EDR stack: it tells you which LLM agent intent caused each kernel event, scores the semantic gap, and writes the verdict back into the console you already use.
           </p>
         </motion.div>
 
@@ -95,7 +81,7 @@ export default function CoreFeatures() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-10 sm:mb-16"
         >
           {pillars.map((pillar) => {
             const Icon = pillar.icon;
@@ -106,15 +92,25 @@ export default function CoreFeatures() {
                 className="group bg-brand-gray/50 border border-white/10 rounded-xl p-4 sm:p-6 hover:border-brand-accent/30 transition-all duration-300"
               >
                 <div className="flex items-start gap-3 sm:gap-4">
-                  <div 
+                  <div
                     className="shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center"
                     style={{ backgroundColor: `${pillar.color}15` }}
                   >
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: pillar.color }} />
                   </div>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <h3 className="text-base sm:text-lg font-bold text-white mb-1 sm:mb-2">{pillar.title}</h3>
-                    <p className="text-white/50 text-xs sm:text-sm leading-relaxed">{pillar.description}</p>
+                    <p className="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">{pillar.description}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {pillar.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium bg-brand-black/40 border border-white/10 text-white/60"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -122,18 +118,43 @@ export default function CoreFeatures() {
           })}
         </motion.div>
 
+        {/* What it is NOT strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-10 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
+          transition={{ duration: 0.8 }}
+          className="bg-brand-gray/30 border border-white/5 rounded-xl p-4 sm:p-6 mb-10 sm:mb-16"
+        >
+          <p className="text-center text-white/40 text-xs sm:text-sm mb-3 uppercase tracking-wider">What Lineage is not</p>
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm">
+            {[
+              "Not a replacement for Falcon / Singularity / Cortex / Defender",
+              "Not a prompt firewall",
+              "Not an identity product",
+              "Not a SIEM",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-1.5 text-white/30">
+                <span className="text-red-500/60 font-bold">×</span>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Technical specs row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
         >
           {[
-            { label: "Cryptographic Identity", value: "Ed25519 DID" },
-            { label: "Key TTL", value: "15 min" },
+            { label: "Fast Path Latency", value: "< 200ms" },
+            { label: "Judge Backend", value: "OpenRouter" },
             { label: "Compliance", value: "SOC2, HIPAA, PCI-DSS" },
-            { label: "Standards", value: "IETF JWT, Google A2A, MCP-I" },
+            { label: "Corpus (NDA-gated)", value: "1,000 samples" },
           ].map((item, i) => (
             <div key={i} className="text-center p-3 sm:p-4 bg-brand-gray/30 border border-white/5 rounded-lg sm:rounded-xl">
               <div className="text-brand-accent font-bold text-sm sm:text-lg mb-0.5 sm:mb-1 whitespace-nowrap">{item.value}</div>

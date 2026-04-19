@@ -2,11 +2,12 @@
 
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import CoreFeatures from "@/components/CoreFeatures";
-import ComplianceBadges from "@/components/ComplianceBadges";
+import EDRIntegrationStrip from "@/components/EDRIntegrationStrip";
 import ProblemSection from "@/components/ProblemSection";
+import CoreFeatures from "@/components/CoreFeatures";
 import HowItWorks from "@/components/HowItWorks";
 import EnterpriseUseCases from "@/components/EnterpriseUseCases";
+import ComplianceBadges from "@/components/ComplianceBadges";
 import FinalCTA from "@/components/FinalCTA";
 import BookDemo from "@/components/BookDemo";
 import Footer from "@/components/Footer";
@@ -16,6 +17,7 @@ export default function Home() {
     <main className="min-h-screen bg-brand-black">
       <Nav />
       <Hero />
+      <EDRIntegrationStrip />
       <ProblemSection />
       <CoreFeatures />
       <HowItWorks />

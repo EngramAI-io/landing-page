@@ -1,41 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlertTriangle, KeyRound, Fingerprint, Radiation } from "lucide-react";
+import { AlertTriangle, Eye, GitBranch, Brain } from "lucide-react";
 
-const risks = [
+const gaps = [
+  {
+    icon: Eye,
+    title: "EDR Sees the Syscall",
+    description: "CrowdStrike / SentinelOne / Cortex XDR / Defender capture every process exec, file open, and network connection on Linux with sub-millisecond precision.",
+    color: "text-white/70",
+    bg: "bg-white/5",
+    border: "border-white/10",
+  },
   {
     icon: AlertTriangle,
-    title: "Broad Permissions",
-    description: "Agents operate with permanent credentials and system-wide access",
+    title: "But Not the Intent That Caused It",
+    description: "None of them know the Python process was a LangChain agent. None of them know the user asked it to 'look up a support ticket'. None of them can tell whether opening /etc/shadow was authorised.",
+    color: "text-red-400",
+    bg: "bg-red-500/5",
+    border: "border-red-500/20",
   },
   {
-    icon: KeyRound,
-    title: "Long Lived Credentials",
-    description: "Static keys persist indefinitely — no automatic rotation",
+    icon: GitBranch,
+    title: "Prompt Injection Closes the Gap — Invisibly",
+    description: "A malicious instruction hidden in a ticket, email, or database record hijacks the agent mid-task. The declared intent says 'lookup'. The kernel sees credential access and a reverse shell. No tool today bridges these two realities.",
+    color: "text-red-400",
+    bg: "bg-red-500/5",
+    border: "border-red-500/20",
   },
   {
-    icon: Fingerprint,
-    title: "No Verified Identity",
-    description: "No cryptographic attribution for agent actions",
-  },
-  {
-    icon: Radiation,
-    title: "Full System Blast Radius",
-    description: "One compromised agent cascades across entire infrastructure",
+    icon: Brain,
+    title: "Lineage Closes That Gap",
+    description: "Lineage joins the agent's Langfuse intent trace with your existing EDR's kernel events. Every syscall is tagged with the agent run, declared intent, and semantic alignment score — then the verdict writes back into your EDR console.",
+    color: "text-brand-accent",
+    bg: "bg-brand-accent/5",
+    border: "border-brand-accent/20",
   },
 ];
 
 const stats = [
   { value: "$4.9M", label: "Avg breach cost when AI agents are compromised" },
-  { value: "90%", label: "Blast radius reduction with task-scoped identity" },
-  { value: "70%", label: "Security review automation via trust scoring" },
+  { value: "73%", label: "Of AI agent incidents involve a semantic gap between declared and actual actions" },
+  { value: "100%", label: "Of commercial EDRs have no LLM intent ingestion today" },
 ];
 
 export default function ProblemSection() {
   return (
     <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-7xl mx-auto">
+
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,22 +64,41 @@ export default function ProblemSection() {
             className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-red-500/10 border border-red-500/30 mb-4 sm:mb-6"
           >
             <AlertTriangle className="w-3 h-3 sm:w-4 sm:h-4 text-red-400" />
-            <span className="text-xs sm:text-sm text-red-400 font-medium">The Problem</span>
+            <span className="text-xs sm:text-sm text-red-400 font-medium">The Attribution Gap</span>
           </motion.div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white leading-tight">
-            AI Agents Are Operating
+            Your EDR Sees <span className="text-white">What</span> Happened.
             <br />
-            <span className="text-red-400">Without a Trust Framework</span>
+            <span className="text-brand-accent">Lineage Tells You Which Agent Caused It.</span>
           </h2>
 
-          <p className="text-sm sm:text-base lg:text-xl text-white/60 max-w-4xl mx-auto leading-relaxed mb-6 sm:mb-8 px-2">
-            Enterprise AI deployments suffer a critical governance gap: agents are granted sweeping, 
-            long-lived permissions far exceeding any single task — and there&apos;s no way to verify 
-            who they are, what they&apos;re allowed to do, or if they&apos;re doing what they were told.
+          <p className="text-sm sm:text-base lg:text-xl text-white/60 max-w-4xl mx-auto leading-relaxed mb-8 px-2">
+            The moment you deploy AI agents on Linux, you create a blind spot between the kernel and the LLM. 
+            CrowdStrike Falcon captures the syscall. It has no way to know the Python process was a LangChain agent 
+            acting on a prompt injection — and that the user never authorised what just happened.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+          {/* The concrete example */}
+          <div className="max-w-2xl mx-auto bg-brand-gray/40 border border-white/10 rounded-xl p-4 sm:p-6 text-left font-mono text-xs sm:text-sm mb-8">
+            <div className="text-white/40 mb-2 font-sans text-[10px] uppercase tracking-wider">What your SOC sees today</div>
+            <div className="space-y-1">
+              <div><span className="text-white/30">falcon_detect:</span> <span className="text-yellow-400/80">python3</span> → <span className="text-red-400">openat(/etc/shadow)</span></div>
+              <div><span className="text-white/30">falcon_detect:</span> <span className="text-yellow-400/80">python3</span> → <span className="text-red-400">connect(45.33.32.156:4444)</span></div>
+            </div>
+            <div className="border-t border-white/10 mt-3 pt-3">
+              <div className="text-white/40 mb-2 font-sans text-[10px] uppercase tracking-wider">What Lineage adds</div>
+              <div className="space-y-1">
+                <div><span className="text-brand-accent">lineage:</span> agent=<span className="text-white">langchain:support-bot</span> trace=<span className="text-white/60">abc123</span></div>
+                <div><span className="text-brand-accent">lineage:</span> declared_intent=<span className="text-white">&ldquo;look up ticket #4821&rdquo;</span></div>
+                <div><span className="text-brand-accent">lineage:</span> verdict=<span className="text-red-400 font-bold">MALICIOUS</span> risk=<span className="text-red-400">95</span> policy=<span className="text-red-400">VIOLATED</span></div>
+                <div><span className="text-brand-accent">lineage:</span> reason=<span className="text-white/70">INTENT_ACTION_MISMATCH · SECRET_ACCESS · EXFIL_SHAPE</span></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
             {stats.map((stat) => (
               <div key={stat.label} className="bg-brand-gray/40 border border-white/10 rounded-xl p-4 sm:p-6">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-accent mb-1 sm:mb-2">{stat.value}</div>
@@ -75,46 +108,37 @@ export default function ProblemSection() {
           </div>
         </motion.div>
 
+        {/* Gap cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-12 sm:mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"
         >
-          {risks.map((risk) => {
-            const Icon = risk.icon;
+          {gaps.map((g, i) => {
+            const Icon = g.icon;
             return (
-              <div
-                key={risk.title}
-                className="group bg-brand-gray/50 border border-red-500/10 rounded-xl p-4 sm:p-6 hover:border-red-500/30 transition-all duration-300"
+              <motion.div
+                key={g.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className={`group ${g.bg} border ${g.border} rounded-xl p-4 sm:p-6 hover:border-opacity-60 transition-all duration-300`}
               >
                 <div className="flex items-start gap-3 sm:gap-4">
-                  <div className="shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-red-500/10 flex items-center justify-center group-hover:bg-red-500/20 transition-colors">
-                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-red-400" />
+                  <div className={`shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${g.bg} border ${g.border} flex items-center justify-center`}>
+                    <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${g.color}`} />
                   </div>
                   <div>
-                    <h3 className="text-base sm:text-lg font-bold text-white mb-1 sm:mb-2">{risk.title}</h3>
-                    <p className="text-white/50 text-xs sm:text-sm leading-relaxed">{risk.description}</p>
+                    <h3 className={`text-base sm:text-lg font-bold mb-1 sm:mb-2 ${g.color}`}>{g.title}</h3>
+                    <p className="text-white/50 text-xs sm:text-sm leading-relaxed">{g.description}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <p className="text-sm sm:text-base lg:text-xl text-white/60 max-w-3xl mx-auto leading-relaxed px-2">
-            <span className="text-brand-accent font-semibold">Without EngramAI:</span> Companies deploy AI agents with permanent credentials, 
-            no identity verification, and no way to know if an agent is doing what it was told. 
-            One compromised agent equals full system breach.
-          </p>
         </motion.div>
       </div>
     </section>
