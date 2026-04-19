@@ -3,422 +3,375 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lineage — AI Agent Attribution</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Lineage</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --teal: #4fd1c5;
-      --amber: #d8a24b;
-      --red: #e36b6b;
-      --text: #f2f5fb;
-      --muted: #9eabba;
-      --muted2: #6b7f94;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       height: 100%;
       overflow: hidden;
-      background: radial-gradient(circle at 18% 12%, rgba(79,209,197,0.07), transparent 30%),
-                  radial-gradient(circle at 82% 78%, rgba(216,162,75,0.06), transparent 28%),
-                  linear-gradient(180deg, #05070b 0%, #070b11 100%);
+      background: #05070b;
       font-family: Inter, system-ui, sans-serif;
-      color: var(--text);
+      color: #f2f5fb;
     }
-    body {
-      display: grid;
-      place-items: center;
-      padding: 16px;
-    }
-    .frame {
+    body { display: grid; place-items: center; }
+
+    .scene {
       width: 100%;
-      max-width: 1440px;
       height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      position: relative;
+      padding: 32px 40px;
+    }
+
+    /* Subtle radial bg */
+    .scene::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 50%, rgba(79,209,197,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── Cards ─────────────────────────────────────────── */
+    .card {
+      flex: 1;
+      max-width: 320px;
+      background: rgba(255,255,255,0.025);
       border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.07);
-      background: rgba(255,255,255,0.01);
-      box-shadow: 0 20px 80px rgba(0,0,0,0.5);
+      padding: 28px 24px;
+      position: relative;
+      z-index: 1;
     }
-    svg { display: block; width: 100%; height: 100%; }
+    .card-left  { border: 1px solid rgba(255,255,255,0.09); }
+    .card-right { border: 1px solid rgba(227,107,107,0.22); background: rgba(227,107,107,0.03); }
 
-    /* Text styles */
-    .lbl    { fill: var(--text);  font-size: 15px; font-weight: 600; }
-    .sub    { fill: var(--muted); font-size: 11.5px; }
-    .mini   { fill: var(--muted2); font-size: 10.5px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; }
-    .tag    { fill: var(--teal);  font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
-    .verdict-text { fill: var(--red); font-size: 13px; font-weight: 700; letter-spacing: 0.04em; font-family: 'JetBrains Mono', monospace; }
-    .allow-text   { fill: var(--teal); font-size: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
-    .center { text-anchor: middle; }
-    .right  { text-anchor: end; }
-    .grid { stroke: rgba(255,255,255,0.04); stroke-width: 1; fill: none; }
-    .divider { stroke: rgba(255,255,255,0.08); stroke-width: 1; }
-
-    /* Nodes */
-    .node        { fill: rgba(8,12,18,0.92); stroke: rgba(255,255,255,0.10); stroke-width: 1.2; }
-    .node-teal   { fill: rgba(8,12,18,0.92); stroke: rgba(79,209,197,0.30); stroke-width: 1.4; }
-    .node-amber  { fill: rgba(8,12,18,0.92); stroke: rgba(216,162,75,0.28); stroke-width: 1.4; }
-    .node-red    { fill: rgba(227,107,107,0.08); stroke: rgba(227,107,107,0.36); stroke-width: 1.4; }
-    .node-accent { fill: rgba(79,209,197,0.06); stroke: rgba(79,209,197,0.45); stroke-width: 1.6; }
-
-    /* Flow lines */
-    .flow      { fill: none; stroke-width: 1.8; stroke-linecap: round; }
-    .flow-dash { fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-dasharray: 5 8; }
-
-    /* Pill tags */
-    .pill-teal  { fill: rgba(79,209,197,0.10); stroke: rgba(79,209,197,0.28); stroke-width: 1; }
-    .pill-amber { fill: rgba(216,162,75,0.10); stroke: rgba(216,162,75,0.28); stroke-width: 1; }
-    .pill-red   { fill: rgba(227,107,107,0.12); stroke: rgba(227,107,107,0.32); stroke-width: 1; }
-    .pill-dark  { fill: rgba(255,255,255,0.04); stroke: rgba(255,255,255,0.10); stroke-width: 1; }
-
-    @keyframes dash-anim {
-      to { stroke-dashoffset: -26; }
+    .card-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 16px;
     }
-    .flow-anim {
-      stroke-dasharray: 6 10;
+
+    .intent-task {
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .intent-task span {
+      color: #4fd1c5;
+      font-weight: 600;
+    }
+
+    .agent-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(79,209,197,0.08);
+      border: 1px solid rgba(79,209,197,0.2);
+      border-radius: 100px;
+      padding: 5px 12px;
+      font-size: 11px;
+      color: rgba(79,209,197,0.85);
+      font-weight: 500;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4fd1c5;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    .event-list { list-style: none; }
+    .event-list li {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: rgba(240,180,180,0.75);
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(227,107,107,0.06);
+      border-left: 2px solid rgba(227,107,107,0.4);
+    }
+    .event-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(227,107,107,0.5);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* ── Centre panel ───────────────────────────────────── */
+    .centre {
+      flex: 0 0 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+      padding: 0 16px;
+    }
+
+    /* Animated connector lines */
+    .connectors {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .engine-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .engine-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: rgba(79,209,197,0.08);
+      border: 1.5px solid rgba(79,209,197,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 32px rgba(79,209,197,0.12);
+      animation: glow-pulse 3s ease-in-out infinite;
+    }
+    .engine-icon svg { width: 30px; height: 30px; }
+
+    .engine-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #4fd1c5;
+      letter-spacing: -0.01em;
+    }
+    .engine-sub {
+      font-size: 10.5px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.06em;
+    }
+
+    /* Score ring */
+    .score-ring {
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .score-ring svg {
+      width: 80px;
+      height: 80px;
+      transform: rotate(-90deg);
+    }
+    .score-track { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 5; }
+    .score-fill  {
+      fill: none;
+      stroke: #e36b6b;
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-dasharray: 188 251;
       stroke-dashoffset: 0;
-      animation: dash-anim 1.4s linear infinite;
+      animation: score-draw 1.8s ease-out forwards;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 0.5; }
-      50%       { opacity: 1; }
+    .score-num {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: #e36b6b;
+      line-height: 1;
     }
-    .pulse { animation: pulse 2s ease-in-out infinite; }
+    .score-num span { font-size: 9px; color: rgba(255,255,255,0.35); font-family: Inter, sans-serif; font-weight: 500; }
 
-    @media (max-width: 900px) {
-      body { padding: 0; }
-      .frame { border-radius: 0; }
-      .lbl  { font-size: 12px; }
-      .sub  { font-size: 9.5px; }
-      .mini { font-size: 8.5px; }
+    /* Verdict pill */
+    .verdict {
+      background: rgba(227,107,107,0.12);
+      border: 1.5px solid rgba(227,107,107,0.4);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e36b6b;
+      letter-spacing: 0.06em;
+      animation: verdict-pop 0.4s ease-out 1.6s both;
+      position: relative;
+      z-index: 1;
     }
-    @media (max-width: 600px) {
-      .lbl  { font-size: 10px; }
-      .sub  { font-size: 8px; }
-      .mini { font-size: 7.5px; }
-      .verdict-text { font-size: 10px; }
+
+    /* Flow arrows (SVG connector) */
+    .connector-svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      left: 0; right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-size: 10.5px;
+      color: rgba(255,255,255,0.2);
+    }
+    .footer-sep { color: rgba(255,255,255,0.08); }
+    .footer em  { color: rgba(79,209,197,0.5); font-style: normal; }
+
+    /* ── Animations ─────────────────────────────────────── */
+    @keyframes blink {
+      0%,100% { opacity: 0.4; } 50% { opacity: 1; }
+    }
+    @keyframes glow-pulse {
+      0%,100% { box-shadow: 0 0 24px rgba(79,209,197,0.10); }
+      50%      { box-shadow: 0 0 40px rgba(79,209,197,0.22); }
+    }
+    @keyframes score-draw {
+      from { stroke-dasharray: 0 251; }
+      to   { stroke-dasharray: 225 251; }
+    }
+    @keyframes verdict-pop {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes flow-dash {
+      to { stroke-dashoffset: -24; }
+    }
+    .flow-line {
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-dasharray: 5 9;
+      animation: flow-dash 1.2s linear infinite;
+    }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .scene { flex-direction: column; gap: 12px; padding: 20px 16px 48px; }
+      .card  { max-width: 100%; width: 100%; }
+      .centre { flex: none; width: 100%; flex-direction: row; flex-wrap: wrap; gap: 12px; justify-content: center; }
+      .engine-badge { flex-direction: row; gap: 12px; align-items: center; }
+      .score-ring { display: none; }
+      .footer { position: static; margin-top: 8px; }
+    }
+    @media (max-width: 520px) {
+      .intent-task { font-size: 13px; }
+      .event-list li { font-size: 10px; }
+      .engine-name { font-size: 13px; }
+      .verdict { font-size: 11px; padding: 6px 16px; }
+      .card { padding: 20px 16px; }
     }
   </style>
 </head>
 <body>
-  <div class="frame">
-    <svg viewBox="0 0 1440 820" role="img"
-         aria-label="Lineage attribution flow: Langfuse intent traces join with EDR kernel events through the Lineage attribution engine and deterministic policy + LLM judge, outputting verdicts back to CrowdStrike Falcon, SentinelOne, Cortex XDR, and Microsoft Defender consoles.">
+  <div class="scene">
 
-      <defs>
-        <!-- Gradients for flow lines -->
-        <linearGradient id="gTeal" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stop-color="rgba(79,209,197,0.0)"/>
-          <stop offset="40%"  stop-color="rgba(79,209,197,0.9)"/>
-          <stop offset="100%" stop-color="rgba(79,209,197,0.3)"/>
-        </linearGradient>
-        <linearGradient id="gAmber" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stop-color="rgba(216,162,75,0.0)"/>
-          <stop offset="40%"  stop-color="rgba(216,162,75,0.9)"/>
-          <stop offset="100%" stop-color="rgba(216,162,75,0.3)"/>
-        </linearGradient>
-        <linearGradient id="gTealR" x1="100%" y1="0%" x2="0%" y2="0%">
-          <stop offset="0%"   stop-color="rgba(79,209,197,0.0)"/>
-          <stop offset="40%"  stop-color="rgba(79,209,197,0.7)"/>
-          <stop offset="100%" stop-color="rgba(79,209,197,0.2)"/>
-        </linearGradient>
-        <linearGradient id="gRed" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stop-color="rgba(227,107,107,0.1)"/>
-          <stop offset="50%"  stop-color="rgba(227,107,107,0.9)"/>
-          <stop offset="100%" stop-color="rgba(227,107,107,0.2)"/>
-        </linearGradient>
-        <!-- Soft glow filter -->
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="8" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="glow-sm">
-          <feGaussianBlur stdDeviation="4" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
+    <!-- ── Left card — what the agent said ──────────────── -->
+    <div class="card card-left">
+      <p class="card-label">What the agent declared</p>
+      <p class="intent-task">
+        <span>"Look up support ticket #4821</span> for user john@acme.com"
+      </p>
+      <div class="agent-tag">
+        <div class="dot"></div>
+        LangChain support-bot · trace abc123
+      </div>
+    </div>
 
-      <!-- ── Background grid ───────────────────────────────────────────── -->
-      <g opacity="0.6">
-        <line class="grid" x1="100" y1="130" x2="1340" y2="130"/>
-        <line class="grid" x1="100" y1="280" x2="1340" y2="280"/>
-        <line class="grid" x1="100" y1="430" x2="1340" y2="430"/>
-        <line class="grid" x1="100" y1="580" x2="1340" y2="580"/>
-        <line class="grid" x1="100" y1="720" x2="1340" y2="720"/>
-        <line class="grid" x1="240" y1="80"  x2="240" y2="760"/>
-        <line class="grid" x1="490" y1="80"  x2="490" y2="760"/>
-        <line class="grid" x1="740" y1="80"  x2="740" y2="760"/>
-        <line class="grid" x1="990" y1="80"  x2="990" y2="760"/>
-        <line class="grid" x1="1200" y1="80" x2="1200" y2="760"/>
-      </g>
+    <!-- ── Centre — Lineage engine ──────────────────────── -->
+    <div class="centre">
 
-      <!-- ── Column headers ────────────────────────────────────────────── -->
-      <text x="122" y="70" class="tag">Intent Source</text>
-      <text x="368" y="70" class="tag">EDR Telemetry</text>
-      <text x="690" y="70" class="tag center">Lineage Engine</text>
-      <text x="1060" y="70" class="tag">EDR Console Output</text>
+      <!-- SVG flow lines between cards -->
+      <svg class="connector-svg" viewBox="0 0 220 300" preserveAspectRatio="none">
+        <!-- Left → centre -->
+        <path class="flow-line" d="M0 150 L90 150" stroke="rgba(79,209,197,0.45)" style="animation-delay:0s"/>
+        <!-- Right → centre (reversed) -->
+        <path class="flow-line" d="M220 150 L130 150" stroke="rgba(227,107,107,0.45)" style="animation-delay:0.3s"/>
+      </svg>
 
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <!-- COLUMN 1 — Langfuse / intent source                            -->
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <rect x="105" y="90" width="210" height="540" rx="16" class="node-teal"/>
+      <div class="engine-badge">
+        <div class="engine-icon">
+          <!-- Target / crosshair icon -->
+          <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="15" cy="15" r="10" stroke="#4fd1c5" stroke-width="1.5" opacity="0.4"/>
+            <circle cx="15" cy="15" r="6"  stroke="#4fd1c5" stroke-width="1.5" opacity="0.7"/>
+            <circle cx="15" cy="15" r="2.5" fill="#4fd1c5"/>
+            <line x1="15" y1="3"  x2="15" y2="7"  stroke="#4fd1c5" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="15" y1="23" x2="15" y2="27" stroke="#4fd1c5" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="3"  y1="15" x2="7"  y2="15" stroke="#4fd1c5" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="23" y1="15" x2="27" y2="15" stroke="#4fd1c5" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="engine-name">Lineage</div>
+          <div class="engine-sub">Attribution engine</div>
+        </div>
+      </div>
 
-      <text x="210" y="122" class="lbl center">Langfuse</text>
-      <text x="210" y="142" class="sub center">Intent traces</text>
+      <!-- Risk score ring -->
+      <div class="score-ring">
+        <svg viewBox="0 0 80 80">
+          <circle class="score-track" cx="40" cy="40" r="32"/>
+          <circle class="score-fill"  cx="40" cy="40" r="32"/>
+        </svg>
+        <div class="score-num">
+          95<span>risk</span>
+        </div>
+      </div>
 
-      <!-- Trace entry -->
-      <rect x="120" y="158" width="180" height="88" rx="10" class="node"/>
-      <text x="136" y="178" class="tag">trace_id</text>
-      <text x="136" y="196" class="mini">abc123</text>
-      <text x="136" y="215" class="sub">user_task:</text>
-      <text x="136" y="232" class="mini">"look up ticket #4821"</text>
+      <!-- Verdict -->
+      <div class="verdict">MALICIOUS</div>
 
-      <!-- Divider -->
-      <line x1="120" y1="256" x2="300" y2="256" class="divider"/>
+    </div>
 
-      <!-- Tool call entry -->
-      <rect x="120" y="266" width="180" height="78" rx="10" class="node"/>
-      <text x="136" y="286" class="tag">tool_call</text>
-      <text x="136" y="304" class="sub">search_files</text>
-      <text x="136" y="322" class="mini">args: {"query":"ticket 4821"}</text>
-      <text x="136" y="338" class="mini">timestamp: 14:22:07Z</text>
+    <!-- ── Right card — what the kernel saw ─────────────── -->
+    <div class="card card-right">
+      <p class="card-label">What the kernel saw</p>
+      <ul class="event-list">
+        <li>
+          <span class="event-label">CrowdStrike · pid 1234 · python3</span>
+          openat( /etc/shadow )
+        </li>
+        <li>
+          <span class="event-label">CrowdStrike · pid 1236 · bash</span>
+          connect( 45.33.32.156:4444 )
+        </li>
+      </ul>
+    </div>
 
-      <!-- Divider -->
-      <line x1="120" y1="354" x2="300" y2="354" class="divider"/>
+    <!-- ── Footer ────────────────────────────────────────── -->
+    <div class="footer">
+      <span><em>&lt;200ms</em> fast path</span>
+      <span class="footer-sep">·</span>
+      <span>Fail-closed</span>
+      <span class="footer-sep">·</span>
+      <span>Verdict written back to <em>Falcon console</em></span>
+      <span class="footer-sep">·</span>
+      <span>No new sensor on host</span>
+    </div>
 
-      <!-- System prompt snippet -->
-      <rect x="120" y="364" width="180" height="88" rx="10" class="node"/>
-      <text x="136" y="384" class="tag">system_prompt</text>
-      <text x="136" y="402" class="sub">You are a support agent</text>
-      <text x="136" y="420" class="sub">with read-only access</text>
-      <text x="136" y="438" class="sub">to the ticketing system.</text>
-
-      <!-- LINEAGE_TRACE_ID badge -->
-      <rect x="120" y="466" width="180" height="46" rx="10" class="pill-teal"/>
-      <text x="210" y="487" class="tag center">LINEAGE_TRACE_ID</text>
-      <text x="210" y="504" class="mini center">propagated to subprocess env</text>
-
-      <!-- env propagation note -->
-      <rect x="120" y="522" width="180" height="90" rx="10" class="pill-dark"/>
-      <text x="136" y="542" class="sub">os.environ[</text>
-      <text x="136" y="558" class="mini">  "LINEAGE_TRACE_ID"</text>
-      <text x="136" y="574" class="mini">] = trace.id</text>
-      <text x="136" y="592" class="sub">→ inherited by all</text>
-      <text x="136" y="606" class="sub">  child processes</text>
-
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <!-- COLUMN 2 — EDR telemetry                                        -->
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <rect x="332" y="90" width="210" height="540" rx="16" class="node-amber"/>
-
-      <text x="437" y="122" class="lbl center">EDR Streaming</text>
-      <text x="437" y="142" class="sub center">Kernel ground truth</text>
-
-      <!-- CrowdStrike event -->
-      <rect x="347" y="158" width="180" height="80" rx="10" class="node"/>
-      <rect x="347" y="158" width="4" height="80" rx="2" fill="rgba(224,32,32,0.7)"/>
-      <text x="362" y="178" class="tag" style="fill:#e02020">CrowdStrike Falcon</text>
-      <text x="362" y="197" class="mini">openat( /etc/shadow )</text>
-      <text x="362" y="212" class="mini">pid=1234 · python3</text>
-      <text x="362" y="228" class="mini">sev=9 · timestamp=14:22:09Z</text>
-
-      <!-- SentinelOne event -->
-      <rect x="347" y="250" width="180" height="76" rx="10" class="node"/>
-      <rect x="347" y="250" width="4" height="76" rx="2" fill="rgba(124,58,237,0.7)"/>
-      <text x="362" y="270" class="tag" style="fill:#9f7aea">SentinelOne</text>
-      <text x="362" y="290" class="mini">connect(45.33.32.156:4444)</text>
-      <text x="362" y="306" class="mini">pid=1236 · python3</text>
-      <text x="362" y="320" class="mini">sev=10 · reverse shell</text>
-
-      <!-- Divider -->
-      <line x1="347" y1="338" x2="527" y2="338" class="divider"/>
-
-      <!-- Process tree -->
-      <rect x="347" y="350" width="180" height="120" rx="10" class="node"/>
-      <text x="362" y="372" class="tag">Process tree</text>
-      <text x="362" y="391" class="mini">lineage-daemon</text>
-      <text x="374" y="409" class="mini">└─ python3 [pid=1234]</text>
-      <text x="394" y="429" class="mini">└─ bash [pid=1235]</text>
-      <text x="414" y="449" class="mini">└─ curl [pid=1236]</text>
-      <text x="362" y="465" class="mini">→ read /proc/1234/environ</text>
-
-      <!-- Trace bind result -->
-      <rect x="347" y="482" width="180" height="44" rx="10" class="pill-teal"/>
-      <text x="437" y="499" class="tag center" style="fill:rgba(79,209,197,0.9)">LINEAGE_TRACE_ID</text>
-      <text x="437" y="516" class="mini center">= abc123 · bound ✓</text>
-
-      <!-- Divider -->
-      <line x1="347" y1="536" x2="527" y2="536" class="divider"/>
-
-      <!-- eBPF fallback note -->
-      <rect x="347" y="546" width="180" height="66" rx="10" class="pill-dark"/>
-      <text x="362" y="566" class="tag">Fallback sensor</text>
-      <text x="362" y="584" class="sub">lineage-sensor (eBPF)</text>
-      <text x="362" y="601" class="sub">for hosts without EDR</text>
-
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <!-- COLUMN 3 — Lineage engine (centre, wider)                       -->
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <rect x="560" y="90" width="360" height="540" rx="16" class="node-accent"/>
-
-      <text x="740" y="122" class="lbl center">Lineage Attribution Engine</text>
-      <text x="740" y="142" class="sub center">Policy + LLM Judge</text>
-
-      <!-- Evidence pack -->
-      <rect x="576" y="158" width="328" height="110" rx="12" class="node"/>
-      <text x="591" y="180" class="tag">Evidence pack</text>
-      <text x="591" y="200" class="sub">trace_id: abc123</text>
-      <text x="591" y="218" class="mini">declared_intent: "look up ticket #4821"</text>
-      <text x="591" y="236" class="mini">tool_call:  search_files( query="ticket 4821" )</text>
-      <text x="591" y="254" class="mini">host_events: [ openat(/etc/shadow), connect(:4444) ]</text>
-
-      <!-- Policy engine -->
-      <rect x="576" y="282" width="148" height="130" rx="12" class="node"/>
-      <text x="650" y="302" class="lbl center" style="font-size:13px">Policy Engine</text>
-      <text x="650" y="320" class="sub center">Deterministic</text>
-      <rect x="591" y="330" width="118" height="28" rx="8" class="pill-red"/>
-      <text x="650" y="349" class="mini center" style="fill:var(--red)">RULE_SECRET_004 CRITICAL</text>
-      <rect x="591" y="364" width="118" height="28" rx="8" class="pill-red"/>
-      <text x="650" y="383" class="mini center" style="fill:var(--red)">RULE_EXFIL_007 HIGH</text>
-      <text x="650" y="405" class="mini center" style="fill:var(--muted2)">0 false pos on config</text>
-
-      <!-- LLM Judge -->
-      <rect x="738" y="282" width="148" height="130" rx="12" class="node"/>
-      <text x="812" y="302" class="lbl center" style="font-size:13px">LLM Judge</text>
-      <text x="812" y="320" class="sub center">DeepSeek-R1</text>
-      <rect x="752" y="330" width="118" height="28" rx="8" class="pill-dark"/>
-      <text x="812" y="349" class="mini center">JSON schema enforced</text>
-      <rect x="752" y="364" width="118" height="28" rx="8" class="pill-dark"/>
-      <text x="812" y="383" class="mini center">Fail-closed · 3 tiers</text>
-      <text x="812" y="405" class="mini center" style="fill:var(--muted2)">&lt;200ms fast path</text>
-
-      <!-- Divider arrow node join -->
-      <line x1="724" y1="282" x2="724" y2="412" class="divider"/>
-      <text x="724" y="360" class="mini center" style="transform:rotate(0)">+</text>
-
-      <!-- Verdict box -->
-      <rect x="576" y="426" width="328" height="180" rx="12" class="node-red"/>
-      <text x="590" y="448" class="tag" style="fill:var(--red)">Verdict · risk_score = 95</text>
-
-      <text x="590" y="470" class="verdict-text">verdict:  MALICIOUS</text>
-      <text x="590" y="490" class="mini">policy_alignment:  violated</text>
-      <text x="590" y="508" class="mini">intent_execution:  inconsistent</text>
-      <text x="590" y="526" class="mini">recommended_action:  isolate</text>
-
-      <rect x="590" y="537" width="300" height="26" rx="6" class="pill-dark"/>
-      <text x="594" y="555" class="mini">primary_reasons: INTENT_ACTION_MISMATCH · SECRET_ACCESS · EXFIL_SHAPE</text>
-
-      <rect x="590" y="570" width="300" height="22" rx="6" style="fill:rgba(227,107,107,0.06);stroke:rgba(227,107,107,0.2);stroke-width:1"/>
-      <text x="594" y="585" class="mini" style="fill:rgba(240,180,180,0.8)">"Agent declared ticket lookup but accessed credentials + reverse shell"</text>
-
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <!-- COLUMN 4 — EDR console write-back                               -->
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <rect x="942" y="90" width="380" height="540" rx="16" class="node"/>
-
-      <text x="1132" y="122" class="lbl center">EDR Console Write-back</text>
-      <text x="1132" y="142" class="sub center">Verdict in your existing tool</text>
-
-      <!-- CrowdStrike -->
-      <rect x="958" y="156" width="348" height="110" rx="12" class="node"/>
-      <rect x="958" y="156" width="4" height="110" rx="2" fill="rgba(224,32,32,0.8)"/>
-      <text x="972" y="176" class="lbl" style="font-size:13px">CrowdStrike Falcon</text>
-      <text x="972" y="196" class="mini">Custom IoC · host=agent-host-01</text>
-      <text x="972" y="212" class="mini">tags: [lineage:attribution, verdict:malicious]</text>
-      <text x="972" y="228" class="mini">agent_run_id: abc123</text>
-      <text x="972" y="247" class="mini">Fusion playbook → host_contain(agent-host-01)</text>
-
-      <!-- SentinelOne -->
-      <rect x="958" y="278" width="348" height="100" rx="12" class="node"/>
-      <rect x="958" y="278" width="4" height="100" rx="2" fill="rgba(124,58,237,0.8)"/>
-      <text x="972" y="298" class="lbl" style="font-size:13px">SentinelOne Singularity</text>
-      <text x="972" y="318" class="mini">STAR rule created · expires 7d</text>
-      <text x="972" y="336" class="mini">Threat Note on incident:</text>
-      <text x="972" y="354" class="mini">  Storyline ← agent_intent node injected</text>
-      <text x="972" y="370" class="mini">  intent_alignment_score: 5/100</text>
-
-      <!-- Cortex XDR -->
-      <rect x="958" y="390" width="168" height="90" rx="12" class="node"/>
-      <rect x="958" y="390" width="4" height="90" rx="2" fill="rgba(249,115,22,0.8)"/>
-      <text x="972" y="410" class="lbl" style="font-size:12px">Cortex XDR</text>
-      <text x="972" y="428" class="mini">BIOC published</text>
-      <text x="972" y="446" class="mini">XSOAR playbook</text>
-      <text x="972" y="464" class="mini">Kill chain +1 layer</text>
-
-      <!-- Defender -->
-      <rect x="1138" y="390" width="168" height="90" rx="12" class="node"/>
-      <rect x="1138" y="390" width="4" height="90" rx="2" fill="rgba(37,99,235,0.8)"/>
-      <text x="1152" y="410" class="lbl" style="font-size:12px">Microsoft Defender</text>
-      <text x="1152" y="428" class="mini">AgentIntentEvents</text>
-      <text x="1152" y="446" class="mini">KQL table updated</text>
-      <text x="1152" y="464" class="mini">Copilot ← Lineage skill</text>
-
-      <!-- Splunk -->
-      <rect x="958" y="492" width="348" height="120" rx="12" class="node"/>
-      <rect x="958" y="492" width="4" height="120" rx="4" fill="rgba(79,209,197,0.6)"/>
-      <text x="972" y="512" class="lbl" style="font-size:13px">Splunk HEC</text>
-      <text x="972" y="530" class="mini">index=lineage sourcetype=lineage:verdict</text>
-      <rect x="972" y="538" width="318" height="22" rx="4" class="pill-dark"/>
-      <text x="977" y="553" class="mini">  verdict=malicious | table trace_id, agent_id, risk_score, explanation</text>
-      <text x="972" y="575" class="mini">+ lineage:hit (2 policy rules)</text>
-      <text x="972" y="591" class="mini">+ lineage:evidence (2 host events)</text>
-      <text x="972" y="605" class="mini">→ also: Sentinel · Chronicle (Phase L3)</text>
-
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <!-- FLOW LINES                                                       -->
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-
-      <!-- Langfuse → engine (intent) -->
-      <path d="M315 310 C340 310, 545 310, 570 310"
-            class="flow flow-anim" stroke="url(#gTeal)"/>
-
-      <!-- EDR → engine (events) -->
-      <path d="M542 290 C556 290, 565 290, 575 290"
-            class="flow flow-anim" stroke="url(#gAmber)"
-            style="animation-delay:0.4s"/>
-
-      <!-- engine → write-back (verdict) -->
-      <path d="M888 490 C915 490, 932 490, 952 490"
-            class="flow flow-anim" stroke="url(#gRed)"
-            style="animation-delay:0.8s"/>
-
-      <!-- LINEAGE_TRACE_ID bind arrow down from Langfuse col to EDR col -->
-      <path d="M210 612 Q210 660, 280 680 Q340 698, 437 680"
-            class="flow-dash" stroke="rgba(79,209,197,0.4)"/>
-      <text x="260" y="678" class="mini" style="fill:rgba(79,209,197,0.6)">env bind</text>
-
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <!-- BOTTOM LEGEND                                                    -->
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <line x1="105" y1="660" x2="1322" y2="660" class="divider"/>
-
-      <circle cx="120" cy="680" r="5" fill="rgba(79,209,197,0.9)" class="pulse"/>
-      <text x="132" y="684" class="sub">Intent flow (Langfuse → engine)</text>
-
-      <circle cx="380" cy="680" r="5" fill="rgba(216,162,75,0.9)" class="pulse" style="animation-delay:0.5s"/>
-      <text x="392" y="684" class="sub">EDR kernel event flow</text>
-
-      <circle cx="620" cy="680" r="5" fill="rgba(227,107,107,0.9)" class="pulse" style="animation-delay:1s"/>
-      <text x="632" y="684" class="sub">Verdict write-back to console</text>
-
-      <rect x="860" y="671" width="100" height="20" rx="6" class="pill-teal"/>
-      <text x="910" y="685" class="mini center" style="fill:var(--teal)">&lt;200ms fast path</text>
-
-      <rect x="974" y="671" width="80" height="20" rx="6" class="pill-dark"/>
-      <text x="1014" y="685" class="mini center">Fail-closed</text>
-
-      <rect x="1068" y="671" width="120" height="20" rx="6" class="pill-dark"/>
-      <text x="1128" y="685" class="mini center">No new sensor on host</text>
-
-      <rect x="1202" y="671" width="118" height="20" rx="6" class="pill-dark"/>
-      <text x="1261" y="685" class="mini center">Apache-2.0 · GitHub</text>
-
-      <!-- Product name -->
-      <text x="105" y="722" class="lbl" style="fill:var(--teal);font-size:18px;font-weight:700">Lineage</text>
-      <text x="105" y="742" class="sub">by EngramAI · AI-attributed Linux EDR overlay · github.com/EngramAI-io/lineage</text>
-
-    </svg>
   </div>
 </body>
 </html>
