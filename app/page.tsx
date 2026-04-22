@@ -17,10 +17,10 @@ export default function Home() {
     <main className="min-h-screen bg-brand-black">
       <Nav />
       <Hero />
+      <HowItWorks />
       <EDRIntegrationStrip />
       <ProblemSection />
       <CoreFeatures />
-      <HowItWorks />
       <EnterpriseUseCases />
       <ComplianceBadges />
       <FinalCTA />

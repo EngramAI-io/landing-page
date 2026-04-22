@@ -122,7 +122,7 @@ export default function Nav() {
             GitHub
           </a>
           <Button size="sm" className="text-sm hidden sm:flex bg-brand-accent text-brand-black hover:bg-brand-accent/90" asChild>
-            <a href="#demo">Book Demo</a>
+            <a href="#demo">Design Partner</a>
           </Button>
           
           {/* Mobile menu button */}
@@ -193,7 +193,7 @@ export default function Nav() {
             </a>
 
             <Button size="sm" className="w-full mt-2 bg-brand-accent text-brand-black" asChild>
-              <a href="#demo" onClick={() => setMobileMenuOpen(false)}>Book Demo</a>
+              <a href="#demo" onClick={() => setMobileMenuOpen(false)}>Design Partner</a>
             </Button>
           </div>
         </motion.div>

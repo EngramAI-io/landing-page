@@ -39,9 +39,9 @@ const gaps = [
 ];
 
 const stats = [
-  { value: "$4.9M", label: "Avg breach cost when AI agents are compromised" },
-  { value: "73%", label: "Of AI agent incidents involve a semantic gap between declared and actual actions" },
-  { value: "100%", label: "Of commercial EDRs have no LLM intent ingestion today" },
+  { value: "trace_id", label: "Attach each host event to the originating agent run" },
+  { value: "policy-first", label: "Deterministic policy remains enforcement authority" },
+  { value: "writeback", label: "Send attributed verdict context into existing SOC workflows" },
 ];
 
 export default function ProblemSection() {
@@ -68,9 +68,9 @@ export default function ProblemSection() {
           </motion.div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white leading-tight">
-            Your EDR Sees <span className="text-white">What</span> Happened.
+            The <span className="text-white">AI Attribution Gap</span> in SOC Workflows.
             <br />
-            <span className="text-brand-accent">Lineage Tells You Which Agent Caused It.</span>
+            <span className="text-brand-accent">Lineage Adds Agent Intent Context to Host Events.</span>
           </h2>
 
           <p className="text-sm sm:text-base lg:text-xl text-white/60 max-w-4xl mx-auto leading-relaxed mb-8 px-2">
@@ -84,7 +84,7 @@ export default function ProblemSection() {
             <div className="text-white/40 mb-2 font-sans text-[10px] uppercase tracking-wider">What your SOC sees today</div>
             <div className="space-y-1">
               <div><span className="text-white/30">falcon_detect:</span> <span className="text-yellow-400/80">python3</span> → <span className="text-red-400">openat(/etc/shadow)</span></div>
-              <div><span className="text-white/30">falcon_detect:</span> <span className="text-yellow-400/80">python3</span> → <span className="text-red-400">connect(45.33.32.156:4444)</span></div>
+              <div><span className="text-white/30">falcon_detect:</span> <span className="text-yellow-400/80">python3</span> → <span className="text-red-400">connect(198.51.100.10:4444)</span></div>
             </div>
             <div className="border-t border-white/10 mt-3 pt-3">
               <div className="text-white/40 mb-2 font-sans text-[10px] uppercase tracking-wider">What Lineage adds</div>

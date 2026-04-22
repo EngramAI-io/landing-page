@@ -41,20 +41,20 @@ export default function Hero() {
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-brand-accent/10 border border-brand-accent/30 mb-4 sm:mb-6">
             <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-brand-accent" />
             <span className="text-xs sm:text-sm text-brand-accent font-medium">
-              Complements CrowdStrike · SentinelOne · Cortex XDR · Defender
+              CrowdStrike-first attribution overlay for AI agents
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-3 sm:mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent leading-[1.1]">
-            The Semantic Intent Firewall
+            CrowdStrike Sees the Syscall.
             <br />
             <span className="bg-gradient-to-r from-brand-accent via-brand-accent to-emerald-400 bg-clip-text text-transparent">
-              for AI Agents
+              Lineage Attributes the Agent Intent.
             </span>
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/70 mb-2 max-w-3xl mx-auto leading-relaxed px-2">
-            Your EDR sees the syscall. <span className="text-white">Lineage tells you which agent intent caused it</span> — and whether it matched what the user asked. Verdict written back into your existing console.
+            Keep Falcon as the system of record. <span className="text-white">Lineage joins LLM intent to host events</span> and writes policy + risk context back into the queue your SOC already uses.
           </p>
         </motion.div>
 
@@ -104,10 +104,10 @@ export default function Hero() {
           className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 max-w-3xl lg:max-w-4xl mx-auto"
         >
           {[
-            { value: "<200ms", label: "p95 Fast Path Latency", highlight: true },
+            { value: "L1", label: "CrowdStrike Integration Status", highlight: true },
             { value: "0",      label: "New Sensors on EDR-Covered Hosts" },
-            { value: "4",      label: "Enterprise EDR Integrations" },
-            { value: "13",     label: "eBPF Syscall Tracepoints (Fallback)" },
+            { value: "Replay", label: "Deterministic Demo Mode" },
+            { value: "/v1/events", label: "Fallback Sensor Ingest Path" },
           ].map((stat, i) => (
             <div key={i} className="text-center p-2 sm:p-3 lg:p-4 bg-brand-gray/30 border border-white/5 rounded-lg sm:rounded-xl">
               <div className={`text-base sm:text-lg lg:text-xl xl:text-2xl font-bold mb-0.5 sm:mb-1 ${stat.highlight ? 'text-brand-accent' : 'text-white'}`}>

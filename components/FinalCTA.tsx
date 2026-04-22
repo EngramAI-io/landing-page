@@ -23,10 +23,10 @@ export default function FinalCTA() {
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 text-white leading-tight">
-            Your EDR Vendor Sees the Syscall.
+            Ready to Run a CrowdStrike-First Pilot?
             <br />
             <span className="bg-gradient-to-r from-brand-accent to-emerald-400 bg-clip-text text-transparent">
-              Lineage Tells Them Who Ordered It.
+              Keep Your Existing SOC Workflow.
             </span>
           </h2>
 
@@ -39,12 +39,12 @@ export default function FinalCTA() {
           </div>
 
           <p className="text-white/50 text-sm sm:text-base lg:text-lg mb-10">
-            90-day free evaluation on a real Linux agent workload. We wire into your existing EDR. You measure blocked attacks, false positive rate, and latency overhead.
+            Start a design-partner evaluation on a real Linux agent workload. We wire into your existing EDR and align pilot success criteria with your SOC team.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <Button size="lg" className="text-base sm:text-lg px-8 sm:px-12 w-full sm:w-auto bg-brand-accent text-brand-black hover:bg-brand-accent/90" asChild>
-              <a href="mailto:partners@lineage.ai?subject=Design Partner Request — Lineage">
+              <a href="mailto:hello@engramai.io?subject=Design Partner Request — Lineage">
                 Request Design-Partner Slot
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
               </a>

@@ -30,7 +30,7 @@ const pillars = [
     icon: ShieldCheck,
     title: "Deterministic Policy Engine",
     description:
-      "12-step deterministic evaluation across 7 rule categories: privilege escalation, secret access, exfil shape, effect conformance, sequence chains. Zero false positives on configured rules.",
+      "12-step deterministic evaluation across rule categories like privilege escalation, secret access, exfil shape, and effect conformance. Policy decisions remain authoritative.",
     color: "#4fd1c5",
     tags: ["RULE_PRIV_ESC_001", "RULE_SECRET_004", "RULE_EXFIL_007", "Immutable audit log"],
   },
@@ -38,9 +38,9 @@ const pillars = [
     icon: Gavel,
     title: "LLM Judge (3 Tiers)",
     description:
-      "Schema-constrained JSON verdict from DeepSeek-R1 / Qwen3 via OpenRouter. Fast (<500ms) inline gate, Standard (2-8s) for ambiguous cases, Deep (10-60s) for analyst review. Fail-closed.",
+      "Schema-constrained JSON verdict via a configurable judge backend. Fast (<500ms) inline gate, Standard (2-8s) for ambiguous cases, Deep (10-60s) for analyst review. Fail-closed.",
     color: "#4fd1c5",
-    tags: ["JSON schema enforced", "Fail-closed", "3 latency tiers", "OpenRouter"],
+    tags: ["JSON schema enforced", "Fail-closed", "3 latency tiers", "Configurable backend"],
   },
 ];
 
@@ -151,10 +151,10 @@ export default function CoreFeatures() {
           className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
         >
           {[
-            { label: "Fast Path Latency", value: "< 200ms" },
+            { label: "Fast Judge Tier", value: "< 500ms target" },
             { label: "Judge Backend", value: "OpenRouter" },
-            { label: "Compliance", value: "SOC2, HIPAA, PCI-DSS" },
-            { label: "Corpus (NDA-gated)", value: "1,000 samples" },
+            { label: "Replay", value: "Deterministic mode" },
+            { label: "Benchmark Corpus", value: "NDA-gated" },
           ].map((item, i) => (
             <div key={i} className="text-center p-3 sm:p-4 bg-brand-gray/30 border border-white/5 rounded-lg sm:rounded-xl">
               <div className="text-brand-accent font-bold text-sm sm:text-lg mb-0.5 sm:mb-1 whitespace-nowrap">{item.value}</div>

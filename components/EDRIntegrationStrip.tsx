@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const vendors = [
-  { name: "CrowdStrike Falcon", phase: "L1 · Live", color: "#e02020" },
+  { name: "CrowdStrike Falcon", phase: "L1 · Primary", color: "#e02020" },
   { name: "SentinelOne Singularity", phase: "L2 · Built", color: "#7c3aed" },
   { name: "Palo Alto Cortex XDR", phase: "L3 · Planned", color: "#f97316" },
   { name: "Microsoft Defender", phase: "L3 · Planned", color: "#2563eb" },
@@ -47,7 +47,7 @@ export default function EDRIntegrationStrip() {
           </div>
 
           <span className="text-white/30 text-xs sm:text-sm uppercase tracking-widest whitespace-nowrap hidden sm:block">
-            + Splunk HEC · Langfuse
+            + Splunk HEC · Langfuse · Design-partner path open
           </span>
         </motion.div>
       </div>

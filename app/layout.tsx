@@ -3,9 +3,9 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "EngramAI - Trust Layer for Agentic AI",
+  title: "Lineage | CrowdStrike-First AI Agent Attribution",
   description:
-    "Enterprise security for AI agents, RAG systems, and MCP servers. The industry's first comprehensive trust layer to protect agentic AI for the enterprise.",
+    "Lineage complements CrowdStrike Falcon by attributing Linux host activity to AI agent intent and writing verdict context back into existing SOC workflows.",
 };
 
 const organizationJsonLd = {
@@ -15,7 +15,7 @@ const organizationJsonLd = {
   url: "https://engramai.io",
   logo: "https://engramai.io/logo.jpg",
   description:
-    "Enterprise security for AI agents, RAG systems, and MCP servers.",
+    "Lineage by EngramAI provides AI agent intent attribution on top of enterprise EDR workflows, starting with CrowdStrike Falcon.",
   sameAs: [
     "https://github.com/EngramAI-io",
     "https://www.linkedin.com/company/engramai-ai",

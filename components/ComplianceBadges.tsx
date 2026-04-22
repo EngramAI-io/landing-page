@@ -17,7 +17,7 @@ const complianceBadges = [
   { label: "HIPAA Safe", type: "compliance" },
   { label: "gosec Clean", type: "security" },
   { label: "govulncheck ✓", type: "security" },
-  { label: "go 1.25.9", type: "security" },
+  { label: "go 1.24.2", type: "security" },
   { label: "Apache-2.0", type: "open" },
 ];
 

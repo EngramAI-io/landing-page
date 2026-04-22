@@ -14,28 +14,28 @@ import {
 } from "lucide-react";
 
 const demoIncludes = [
-  "Live platform walkthrough",
-  "Custom threat assessment",
-  "Integration planning",
-  "Pricing discussion",
+  "CrowdStrike-focused architecture walkthrough",
+  "Integration surface mapping (Streaming, IoC, Fusion)",
+  "Pilot success criteria definition",
+  "Security + deployment review",
   "Q&A with engineering team"
 ];
 
 const useCases = [
   {
     icon: Building2,
-    title: "Enterprise AI Teams",
-    description: "Secure your multi-agent workflows and RAG systems at scale."
+    title: "Falcon Program Owners",
+    description: "Add intent attribution without replacing your current EDR workflow."
   },
   {
     icon: Shield,
-    title: "Financial Services",
-    description: "Meet compliance requirements with cryptographic audit trails."
+    title: "SOC Engineering Teams",
+    description: "Enrich existing detections with trace-linked agent context."
   },
   {
     icon: Zap,
-    title: "AI-Native Companies",
-    description: "Ship faster with confidence. Protect your AI infrastructure from day one."
+    title: "AI Platform Teams",
+    description: "Validate agent safety controls before broad production rollout."
   }
 ];
 
@@ -61,17 +61,17 @@ export default function BookDemo() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/10 border border-brand-accent/30 mb-6"
             >
               <Calendar className="w-4 h-4 text-brand-accent" />
-              <span className="text-sm text-brand-accent font-medium">Book a Demo</span>
+              <span className="text-sm text-brand-accent font-medium">Design-Partner Program</span>
             </motion.div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
-              See EngramAI{" "}
-              <span className="text-brand-accent">in Action</span>
+              Start a CrowdStrike{" "}
+              <span className="text-brand-accent">Design-Partner Evaluation</span>
             </h2>
 
             <p className="text-xl text-white/60 mb-8 leading-relaxed">
-              Get a personalized walkthrough of the Defense Layer Platform. 
-              See how we protect AI agents, RAG systems, and MCP servers with 100% detection accuracy.
+              Get a focused technical session on how Lineage complements Falcon for AI agent workloads.
+              We define pilot goals, scope, and integration steps with your team.
             </p>
 
             {/* What's included */}
@@ -134,14 +134,14 @@ export default function BookDemo() {
                     Let’s Talk
                   </h3>
                   <p className="text-white/60">
-                    Reach out to schedule your personalized demo
+                    Reach out to request a design-partner intake call
                   </p>
                 </div>
 
                 {/* Email CTA */}
                 <div className="space-y-4">
                   <a 
-                    href="mailto:hello@engramai.io?subject=Demo Request - EngramAI Defense Layer"
+                    href="mailto:hello@engramai.io?subject=Design Partner Request - CrowdStrike Program"
                     className="block"
                   >
                     <Button 
@@ -155,7 +155,7 @@ export default function BookDemo() {
                   </a>
 
                   <p className="text-center text-white/40 text-sm">
-                    We typically respond within 24 hours
+                    We typically respond within 1 business day
                   </p>
                 </div>
 
@@ -179,7 +179,7 @@ export default function BookDemo() {
                   </a>
                   <span className="text-white/20">|</span>
                   <a 
-                    href="mailto:security@engramai.io"
+                    href="mailto:hello@engramai.io?subject=Security Question - Lineage"
                     className="flex items-center gap-2 text-white/60 hover:text-brand-accent transition-colors"
                   >
                     <Shield className="w-4 h-4" />
@@ -191,16 +191,16 @@ export default function BookDemo() {
                 <div className="mt-8 pt-6 border-t border-white/10">
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
-                      <div className="text-xl font-bold text-brand-accent">100%</div>
-                      <div className="text-[10px] text-white/40">Detection</div>
+                      <div className="text-xl font-bold text-brand-accent">L1</div>
+                      <div className="text-[10px] text-white/40">Falcon Status</div>
                     </div>
                     <div>
-                      <div className="text-xl font-bold text-white">&lt;5ms</div>
-                      <div className="text-[10px] text-white/40">Latency</div>
+                      <div className="text-xl font-bold text-white">API-first</div>
+                      <div className="text-[10px] text-white/40">Integration</div>
                     </div>
                     <div>
-                      <div className="text-xl font-bold text-white">Enterprise</div>
-                      <div className="text-[10px] text-white/40">Ready</div>
+                      <div className="text-xl font-bold text-white">Policy-first</div>
+                      <div className="text-[10px] text-white/40">Enforcement</div>
                     </div>
                   </div>
                 </div>

@@ -10,7 +10,7 @@ const integrations = [
     statusColor: "text-brand-accent",
     statusBg: "bg-brand-accent/10 border-brand-accent/30",
     description:
-      "Reads the Falcon Streaming API and Data Replay. Writes attributed detections back as Custom IoCs and Falcon Fusion playbook triggers. Listed on Falcon Marketplace (CSTAP application in progress).",
+      "Reads the Falcon Streaming API and Data Replay. Writes attributed detections back as Custom IoCs and Falcon Fusion playbook triggers. CrowdStrike partner/CSTAP pitch is planned next.",
     writes: ["Custom IoC (agent_run_id, intent_score)", "Falcon Fusion auto-contain", "Foundry app"],
     reads: ["Streaming API", "Data Replay"],
   },
