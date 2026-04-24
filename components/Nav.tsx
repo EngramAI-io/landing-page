@@ -8,9 +8,9 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 const productLinks = [
-  { label: "Sentinel", href: "/products/sentinel", desc: "MCP Observability Sidecar" },
-  { label: "MemGuard", href: "/products/memguard", desc: "Memory Poisoning Detection" },
-  { label: "BOG", href: "/products/bog", desc: "Behavioral Orchestration Graph" },
+  { label: "Lineage", href: "https://github.com/EngramAI-io/lineage", desc: "AI-attributed Linux EDR overlay" },
+  { label: "Benchmark Harness", href: "https://github.com/EngramAI-io/lineage/tree/main/bench/harness", desc: "Open-source eval framework" },
+  { label: "Scorecard", href: "https://github.com/EngramAI-io/lineage/blob/main/bench/SCORECARD.md", desc: "NDA-gated accuracy benchmark" },
 ];
 
 export default function Nav() {
@@ -36,8 +36,8 @@ export default function Nav() {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-brand-black/80 border-b border-white/5"
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center space-x-3 group">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
+        <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group min-w-0">
           <div className="relative">
             <div className="absolute inset-0 bg-brand-accent/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
             <Image
@@ -45,13 +45,13 @@ export default function Nav() {
               alt="EngramAI Logo"
               width={40}
               height={40}
-              className="h-10 w-auto rounded-lg relative"
+              className="h-8 sm:h-10 w-auto rounded-lg relative shrink-0"
               priority
             />
           </div>
-          <div className="flex flex-col">
-            <span className="text-lg font-bold text-white">EngramAI</span>
-            <span className="text-[9px] text-brand-accent uppercase tracking-widest">Trust Protocol</span>
+          <div className="flex flex-col min-w-0">
+            <span className="text-base sm:text-lg font-bold text-white leading-tight truncate">Lineage</span>
+            <span className="text-[9px] text-brand-accent uppercase tracking-widest hidden sm:block">by EngramAI</span>
           </div>
         </Link>
 
@@ -102,7 +102,7 @@ export default function Nav() {
           </div>
 
           <a
-            href="https://github.com/EngramAI-io"
+            href="https://github.com/EngramAI-io/lineage"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-white/70 hover:text-brand-accent transition-colors relative group"
@@ -114,15 +114,15 @@ export default function Nav() {
 
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com/EngramAI-io"
+            href="https://github.com/EngramAI-io/lineage"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:block text-sm text-white/70 hover:text-brand-accent transition-colors"
+            className="hidden lg:block text-sm text-white/70 hover:text-brand-accent transition-colors"
           >
             GitHub
           </a>
           <Button size="sm" className="text-sm hidden sm:flex bg-brand-accent text-brand-black hover:bg-brand-accent/90" asChild>
-            <a href="#demo">Book Demo</a>
+            <a href="#demo">Design Partner</a>
           </Button>
           
           {/* Mobile menu button */}
@@ -183,7 +183,7 @@ export default function Nav() {
             </AnimatePresence>
 
             <a
-              href="https://github.com/EngramAI-io"
+              href="https://github.com/EngramAI-io/lineage"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/70 hover:text-brand-accent transition-colors py-2"
@@ -193,7 +193,7 @@ export default function Nav() {
             </a>
 
             <Button size="sm" className="w-full mt-2 bg-brand-accent text-brand-black" asChild>
-              <a href="#demo" onClick={() => setMobileMenuOpen(false)}>Book Demo</a>
+              <a href="#demo" onClick={() => setMobileMenuOpen(false)}>Design Partner</a>
             </Button>
           </div>
         </motion.div>
