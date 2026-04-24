@@ -80,15 +80,15 @@ export default function ProblemSection() {
           </p>
 
           {/* The concrete example */}
-          <div className="max-w-2xl mx-auto bg-brand-gray/40 border border-white/10 rounded-xl p-4 sm:p-6 text-left font-mono text-xs sm:text-sm mb-8">
+          <div className="max-w-2xl mx-auto bg-brand-gray/40 border border-white/10 rounded-xl p-4 sm:p-6 text-left font-mono text-xs sm:text-sm mb-8 overflow-x-auto">
             <div className="text-white/40 mb-2 font-sans text-[10px] uppercase tracking-wider">What your SOC sees today</div>
-            <div className="space-y-1">
+            <div className="space-y-1 whitespace-nowrap min-w-max">
               <div><span className="text-white/30">falcon_detect:</span> <span className="text-yellow-400/80">python3</span> → <span className="text-red-400">openat(/etc/shadow)</span></div>
               <div><span className="text-white/30">falcon_detect:</span> <span className="text-yellow-400/80">python3</span> → <span className="text-red-400">connect(198.51.100.10:4444)</span></div>
             </div>
             <div className="border-t border-white/10 mt-3 pt-3">
               <div className="text-white/40 mb-2 font-sans text-[10px] uppercase tracking-wider">What Lineage adds</div>
-              <div className="space-y-1">
+              <div className="space-y-1 whitespace-nowrap min-w-max">
                 <div><span className="text-brand-accent">lineage:</span> agent=<span className="text-white">langchain:support-bot</span> trace=<span className="text-white/60">abc123</span></div>
                 <div><span className="text-brand-accent">lineage:</span> declared_intent=<span className="text-white">&ldquo;look up ticket #4821&rdquo;</span></div>
                 <div><span className="text-brand-accent">lineage:</span> verdict=<span className="text-red-400 font-bold">MALICIOUS</span> risk=<span className="text-red-400">95</span> policy=<span className="text-red-400">VIOLATED</span></div>

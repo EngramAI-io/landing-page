@@ -36,8 +36,8 @@ export default function Nav() {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-brand-black/80 border-b border-white/5"
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center space-x-3 group">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
+        <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group min-w-0">
           <div className="relative">
             <div className="absolute inset-0 bg-brand-accent/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
             <Image
@@ -45,13 +45,13 @@ export default function Nav() {
               alt="EngramAI Logo"
               width={40}
               height={40}
-              className="h-10 w-auto rounded-lg relative"
+              className="h-8 sm:h-10 w-auto rounded-lg relative shrink-0"
               priority
             />
           </div>
-          <div className="flex flex-col">
-            <span className="text-lg font-bold text-white">Lineage</span>
-            <span className="text-[9px] text-brand-accent uppercase tracking-widest">by EngramAI</span>
+          <div className="flex flex-col min-w-0">
+            <span className="text-base sm:text-lg font-bold text-white leading-tight truncate">Lineage</span>
+            <span className="text-[9px] text-brand-accent uppercase tracking-widest hidden sm:block">by EngramAI</span>
           </div>
         </Link>
 
@@ -117,7 +117,7 @@ export default function Nav() {
             href="https://github.com/EngramAI-io/lineage"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:block text-sm text-white/70 hover:text-brand-accent transition-colors"
+            className="hidden lg:block text-sm text-white/70 hover:text-brand-accent transition-colors"
           >
             GitHub
           </a>

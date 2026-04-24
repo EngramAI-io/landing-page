@@ -45,7 +45,7 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-3 sm:mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent leading-[1.1]">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-3 sm:mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent leading-[1.12] sm:leading-[1.1]">
             CrowdStrike Sees the Syscall.
             <br />
             <span className="bg-gradient-to-r from-brand-accent via-brand-accent to-emerald-400 bg-clip-text text-transparent">
@@ -53,7 +53,7 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/70 mb-2 max-w-3xl mx-auto leading-relaxed px-2">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/70 mb-2 max-w-3xl mx-auto leading-relaxed sm:leading-relaxed px-2">
             Keep Falcon as the system of record. <span className="text-white">Lineage joins LLM intent to host events</span> and writes policy + risk context back into the queue your SOC already uses.
           </p>
         </motion.div>
