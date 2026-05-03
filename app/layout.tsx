@@ -3,9 +3,9 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Yali | Fight Machine-Speed Threats with Machine-Speed Defense",
+  title: "Yali | Mythos-Level Autonomous Red-Teaming for AI Systems",
   description:
-    "Autonomous AI red-teaming platform that simulates Mythos-level threats. Kernel-level verification, airtight VPC execution, complete OWASP ASI coverage.",
+    "Test your AI Agents, RAG systems, MCPs, and AI Dies against real attack patterns. Kernel-level verification, VPC-isolated execution, complete OWASP ASI + MITRE ATLAS + CWE coverage.",
 };
 
 const organizationJsonLd = {
@@ -15,7 +15,7 @@ const organizationJsonLd = {
   url: "https://engramai.io",
   logo: "https://engramai.io/logo.jpg",
   description:
-    "Yali by EngramAI is the VulnOps platform for the post-Mythos enterprise — fighting machine-speed threats at machine speed.",
+    "Yali by EngramAI is the VulnOps platform for the Mythos era — fighting machine-speed threats at machine speed with autonomous red-teaming for AI systems.",
   sameAs: [
     "https://github.com/EngramAI-io",
     "https://www.linkedin.com/company/engramai-ai",

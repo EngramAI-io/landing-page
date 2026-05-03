@@ -1,53 +1,68 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Lock, Server, Shield, Eye, Database, Zap, CheckCircle } from "lucide-react";
+import { Lock, Server, Shield, Eye, Database, CheckCircle, FileText, Scale } from "lucide-react";
 
 const securityFeatures = [
   {
     icon: Server,
     title: "Firecracker MicroVMs",
-    description: "Lightweight VMs provide hardware-enforced isolation. Each campaign runs in a fresh, ephemeral environment.",
+    description: "Hardware-enforced isolation with ephemeral environments. Each campaign runs in a fresh, clean VM.",
     color: "#8b5cf6",
   },
   {
     icon: Lock,
-    title: "Zero Egress of Your Data",
-    description: "Training, inference, and reporting all happen inside your VPC. Your sensitive data never touches our infrastructure.",
+    title: "Zero Data Egress",
+    description: "All execution happens inside your VPC. Your sensitive data, models, and infrastructure never leave your network.",
     color: "#22c55e",
   },
   {
     icon: Eye,
     title: "eBPF Kernel Telemetry",
-    description: "We read raw kernel events — process spawns, syscalls, network egress — to prove exploitation happened, not just that the model refused.",
+    description: "Read raw kernel events — process spawns, syscalls, network egress — to prove exploitation at the source.",
     color: "#f97316",
   },
   {
     icon: Database,
-    title: "Append-Only Audit Logs",
-    description: "Hash-chained telemetry with Ed25519 signatures. Verifiable offline, tamper-evident, and audit-ready.",
+    title: "Tamper-Evident Logs",
+    description: "Hash-chained audit trails with Ed25519 signatures. Verifiable offline, immutable, and audit-ready.",
     color: "#00d4ff",
   },
 ];
 
 const trustIndicators = [
-  { label: "Isolation", value: "Hardware-enforced" },
-  { label: "Data egress", value: "Zero" },
-  { label: "Telemetry", value: "Kernel-level" },
-  { label: "Audit trail", value: "Tamper-evident" },
+  { label: "Isolation", value: "Hardware" },
+  { label: "Data Egress", value: "Zero" },
+  { label: "Telemetry", value: "Kernel" },
+  { label: "Audit", value: "Immutable" },
 ];
 
 const complianceMappings = [
-  { standard: "EU AI Act 2026", requirement: "Continuous adversarial testing of high-risk AI systems" },
-  { standard: "NIST AI RMF", requirement: "Red-teaming before and during AI deployment" },
-  { standard: "SOC 2 Type II", requirement: "AI-specific penetration testing evidence" },
-  { standard: "OWASP ASI Top 10", requirement: "De facto standard for AI security audits" },
+  {
+    standard: "EU AI Act 2026",
+    requirement: "Mandatory adversarial testing for high-risk AI systems",
+    icon: Scale
+  },
+  {
+    standard: "NIST AI RMF",
+    requirement: "Red-teaming required before and during deployment",
+    icon: Shield
+  },
+  {
+    standard: "SOC 2 Type II",
+    requirement: "AI-specific penetration testing evidence required",
+    icon: FileText
+  },
+  {
+    standard: "OWASP ASI Top 10",
+    requirement: "De facto standard for enterprise AI security audits",
+    icon: CheckCircle
+  },
 ];
 
 export default function ExecutionSandbox() {
   return (
     <section id="sandbox" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
           backgroundImage: `
@@ -139,24 +154,29 @@ export default function ExecutionSandbox() {
         >
           <h3 className="text-lg sm:text-xl font-bold text-white mb-6 text-center">You&apos;re Already Required to Do This</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {complianceMappings.map((item, i) => (
-              <motion.div
-                key={item.standard}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-brand-gray/30 border border-white/10 rounded-xl p-4 sm:p-5"
-              >
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-white font-semibold text-sm sm:text-base mb-1">{item.standard}</h4>
-                    <p className="text-white/50 text-xs sm:text-sm">{item.requirement}</p>
+            {complianceMappings.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.standard}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="bg-brand-gray/30 border border-white/10 rounded-xl p-4 sm:p-5"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-brand-accent/10 flex items-center justify-center shrink-0">
+                      <Icon className="w-5 h-5 text-brand-accent" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold text-sm sm:text-base mb-1">{item.standard}</h4>
+                      <p className="text-white/50 text-xs sm:text-sm">{item.requirement}</p>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
       </div>
