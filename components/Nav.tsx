@@ -4,13 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Brain, Target, Shield } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 const productLinks = [
-  { label: "Lineage", href: "https://github.com/EngramAI-io/lineage", desc: "AI-attributed Linux EDR overlay" },
-  { label: "Benchmark Harness", href: "https://github.com/EngramAI-io/lineage/tree/main/bench/harness", desc: "Open-source eval framework" },
-  { label: "Scorecard", href: "https://github.com/EngramAI-io/lineage/blob/main/bench/SCORECARD.md", desc: "NDA-gated accuracy benchmark" },
+  { label: "Yali Platform", href: "#", desc: "AI red-teaming orchestration" },
+  { label: "Planner SLM", href: "#", desc: "Campaign decomposition (Qwen3-32B)" },
+  { label: "Executor SLM", href: "#", desc: "Attack execution (Llama-3.2-8B)" },
+  { label: "Verifier SLM", href: "#", desc: "Success analysis (Qwen3-14B)" },
 ];
 
 export default function Nav() {
@@ -30,7 +31,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <motion.nav 
+    <motion.nav
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -50,7 +51,7 @@ export default function Nav() {
             />
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-base sm:text-lg font-bold text-white leading-tight truncate">Lineage</span>
+            <span className="text-base sm:text-lg font-bold text-white leading-tight truncate">Yali</span>
             <span className="text-[9px] text-brand-accent uppercase tracking-widest hidden sm:block">by EngramAI</span>
           </div>
         </Link>
@@ -71,7 +72,7 @@ export default function Nav() {
               onClick={() => setProductsOpen(!productsOpen)}
               className="flex items-center gap-1 text-sm text-white/70 hover:text-brand-accent transition-colors relative group"
             >
-              Products
+              Platform
               <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${productsOpen ? "rotate-180" : ""}`} />
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent group-hover:w-full transition-all duration-300" />
             </button>
@@ -83,9 +84,9 @@ export default function Nav() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.96 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-brand-gray/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden"
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 bg-brand-gray/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden"
                 >
-                  {productLinks.map((p) => (
+                  {productLinks.map((p, i) => (
                     <Link
                       key={p.href}
                       href={p.href}
@@ -102,19 +103,25 @@ export default function Nav() {
           </div>
 
           <a
-            href="https://github.com/EngramAI-io/lineage"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#architecture"
             className="text-sm text-white/70 hover:text-brand-accent transition-colors relative group"
           >
-            Docs
+            Architecture
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent group-hover:w-full transition-all duration-300" />
+          </a>
+
+          <a
+            href="#pipeline"
+            className="text-sm text-white/70 hover:text-brand-accent transition-colors relative group"
+          >
+            Dataset Pipeline
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent group-hover:w-full transition-all duration-300" />
           </a>
         </div>
 
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com/EngramAI-io/lineage"
+            href="https://github.com/EngramAI-io"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden lg:block text-sm text-white/70 hover:text-brand-accent transition-colors"
@@ -122,9 +129,9 @@ export default function Nav() {
             GitHub
           </a>
           <Button size="sm" className="text-sm hidden sm:flex bg-brand-accent text-brand-black hover:bg-brand-accent/90" asChild>
-            <a href="#demo">Design Partner</a>
+            <a href="#demo">Early Access</a>
           </Button>
-          
+
           {/* Mobile menu button */}
           <button
             className="lg:hidden p-2 text-white/70 hover:text-white"
@@ -155,7 +162,7 @@ export default function Nav() {
               className="flex items-center justify-between text-white/70 hover:text-brand-accent transition-colors py-2"
               onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
             >
-              Products
+              Platform
               <ChevronDown className={`w-4 h-4 transition-transform ${mobileProductsOpen ? "rotate-180" : ""}`} />
             </button>
 
@@ -183,17 +190,33 @@ export default function Nav() {
             </AnimatePresence>
 
             <a
-              href="https://github.com/EngramAI-io/lineage"
+              href="#architecture"
+              className="text-white/70 hover:text-brand-accent transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Architecture
+            </a>
+
+            <a
+              href="#pipeline"
+              className="text-white/70 hover:text-brand-accent transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Dataset Pipeline
+            </a>
+
+            <a
+              href="https://github.com/EngramAI-io"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/70 hover:text-brand-accent transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Docs
+              GitHub
             </a>
 
             <Button size="sm" className="w-full mt-2 bg-brand-accent text-brand-black" asChild>
-              <a href="#demo" onClick={() => setMobileMenuOpen(false)}>Design Partner</a>
+              <a href="#demo" onClick={() => setMobileMenuOpen(false)}>Early Access</a>
             </Button>
           </div>
         </motion.div>

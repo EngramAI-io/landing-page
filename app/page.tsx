@@ -2,12 +2,9 @@
 
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import EDRIntegrationStrip from "@/components/EDRIntegrationStrip";
-import ProblemSection from "@/components/ProblemSection";
-import CoreFeatures from "@/components/CoreFeatures";
-import HowItWorks from "@/components/HowItWorks";
-import EnterpriseUseCases from "@/components/EnterpriseUseCases";
-import ComplianceBadges from "@/components/ComplianceBadges";
+import AgentArchitecture from "@/components/AgentArchitecture";
+import ExecutionSandbox from "@/components/ExecutionSandbox";
+import Comparison from "@/components/Comparison";
 import FinalCTA from "@/components/FinalCTA";
 import BookDemo from "@/components/BookDemo";
 import Footer from "@/components/Footer";
@@ -17,12 +14,9 @@ export default function Home() {
     <main className="min-h-screen bg-brand-black overflow-x-hidden">
       <Nav />
       <Hero />
-      <HowItWorks />
-      <EDRIntegrationStrip />
-      <ProblemSection />
-      <CoreFeatures />
-      <EnterpriseUseCases />
-      <ComplianceBadges />
+      <AgentArchitecture />
+      <ExecutionSandbox />
+      <Comparison />
       <FinalCTA />
       <BookDemo />
       <Footer />

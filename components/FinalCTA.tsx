@@ -23,35 +23,36 @@ export default function FinalCTA() {
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 text-white leading-tight">
-            Ready to Run a CrowdStrike-First Pilot?
+            Ready to Deploy
             <br />
             <span className="bg-gradient-to-r from-brand-accent to-emerald-400 bg-clip-text text-transparent">
-              Keep Your Existing SOC Workflow.
+              AI-Powered Red-Teaming?
             </span>
           </h2>
 
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 lg:gap-8 text-sm sm:text-base lg:text-xl mb-6 sm:mb-10">
-            <span className="text-white/70">No new sensor</span>
+            <span className="text-white/70">Specialized SLMs</span>
             <span className="text-brand-accent">·</span>
-            <span className="text-white/70">No new console</span>
+            <span className="text-white/70">104K+ dataset</span>
             <span className="text-brand-accent">·</span>
-            <span className="text-white/70">One integration</span>
+            <span className="text-white/70">50% cost savings</span>
           </div>
 
           <p className="text-white/50 text-sm sm:text-base lg:text-lg mb-10">
-            Start a design-partner evaluation on a real Linux agent workload. We wire into your existing EDR and align pilot success criteria with your SOC team.
+            Start an early access evaluation with your AI agent workloads. We define pilot goals,
+            scope, and integration steps with your security team.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <Button size="lg" className="text-base sm:text-lg px-8 sm:px-12 w-full sm:w-auto bg-brand-accent text-brand-black hover:bg-brand-accent/90" asChild>
-              <a href="mailto:hello@engramai.io?subject=Design Partner Request — Lineage">
-                Request Design-Partner Slot
+              <a href="mailto:hello@engramai.io?subject=Early Access Request — Yali">
+                Request Early Access
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
               </a>
             </Button>
 
             <Button size="lg" variant="outline" className="text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto" asChild>
-              <a href="https://github.com/EngramAI-io/lineage" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/EngramAI-io" target="_blank" rel="noopener noreferrer">
                 <Github className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 View on GitHub
               </a>

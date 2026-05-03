@@ -3,9 +3,9 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Lineage | CrowdStrike-First AI Agent Attribution",
+  title: "Yali | Fight Machine-Speed Threats with Machine-Speed Defense",
   description:
-    "Lineage complements CrowdStrike Falcon by attributing Linux host activity to AI agent intent and writing verdict context back into existing SOC workflows.",
+    "Autonomous AI red-teaming platform that simulates Mythos-level threats. Kernel-level verification, airtight VPC execution, complete OWASP ASI coverage.",
 };
 
 const organizationJsonLd = {
@@ -15,7 +15,7 @@ const organizationJsonLd = {
   url: "https://engramai.io",
   logo: "https://engramai.io/logo.jpg",
   description:
-    "Lineage by EngramAI provides AI agent intent attribution on top of enterprise EDR workflows, starting with CrowdStrike Falcon.",
+    "Yali by EngramAI is the VulnOps platform for the post-Mythos enterprise — fighting machine-speed threats at machine speed.",
   sameAs: [
     "https://github.com/EngramAI-io",
     "https://www.linkedin.com/company/engramai-ai",
