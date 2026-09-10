@@ -83,7 +83,7 @@ export default function Home() {
               <p>
                 Every product answers one layer of the same question:{" "}
                 <strong>
-                  "What is the agent doing, who authorized it, and should it be allowed?"
+                  &ldquo;What is the agent doing, who authorized it, and should it be allowed?&rdquo;
                 </strong>{" "}
                 From memory poisoning detection (MemGuard) to identity (agent-identity) to
                 protocol enforcement (MCP Guard) to trajectory enforcement (Aegis) to EDR
